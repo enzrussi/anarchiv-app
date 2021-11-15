@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Anarchiv</title>
+    <title>{{env('APP_NAME')}}</title>
     <link rel="stylesheet" href="{{asset('css/bootstrap-italia.min.css')}}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js" crossorigin="anonymous"></script>
@@ -29,14 +29,15 @@
                     </a>
                     <div class="link-list-wrapper collapse" id="menu1">
                       <ul class="link-list">
-                        @auth('admin')<li><a class="list-item" href="#">Link 1</a></li>@endauth
-                        <li><a class="list-item active" href="#">Link 2 Active</a></li>
+                        @auth('admin')<li><a class="list-item" href="{{route('user.index')}}">Gestione Utenti Autorizzati</a></li>@endauth
+                        @auth<li><a class="list-item active" href="#">Link 2 Active</a></li>@endauth
                       </ul>
                     </div>
                   </nav>
                 </div>
                 <div class="it-header-slim-right-zone">
-                  <div class="it-access-top-wrapper">
+                    @auth
+                    <div class="it-access-top-wrapper">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         <span>{{Auth::user()->name}}</span>
                         <svg class="icon d-none d-lg-block">
@@ -60,7 +61,8 @@
                           </div>
                         </div>
                       </div>
-                  </div>
+                    </div>
+                     @endauth
                 </div>
               </div>
             </div>
@@ -68,8 +70,17 @@
         </div>
       </div>
 
-    <div class='container'>
+      {{-- CONTAINER --}}
+      <div class='container'>
+          {{-- ALERT --}}
+            @if(session('alerttype'))
+            <div class="alert alert-{{session('alerttype')}}" role="alert">
+            {{session('alertmessage')}}
+            </div>
+            @endif
+      <div>
         @yield('content')
+      </div>
     </div>
 
 </body>

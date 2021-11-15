@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -39,12 +40,14 @@ Route::get('dashboard', function(){
 })->name('dashboard')->middleware('auth:authuser');
 
 Route::get('changepassword/{perid}', function(Request $request) {
-    return view('auth.changepassword',['id'=> $request->perid]);
+    return view('auth.changepassword',['perid'=> $request->perid]);
 })->name('changepassword')->middleware('auth:authuser');
 
 Route::get('adminchangepassword/{perid}', function(Request $request) {
-    return view('auth.changepassword',['id'=> $request->perid]);
+    return view('auth.changepassword',['perid'=> $request->perid]);
 })->name('adminchangepassword')->middleware('auth:admin');
 
 Route::post('updatepassword',[AuthController::class,'updatepassword'])->name('updatepassword');
+
+Route::resource('user', UserController::class)->middleware('auth:admin');
 

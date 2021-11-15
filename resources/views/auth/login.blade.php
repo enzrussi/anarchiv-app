@@ -1,4 +1,4 @@
-@extends('publicbase')
+@extends('welcome')
 
 @section('content')
 
@@ -11,6 +11,7 @@
     </ul>
 </div>
 @endif
+<div class="mx-auto text-white text-center mt-2" style="width: 800px;">
 
 <form action="{{route('verifyUser')}}"" method="POST">
     @csrf
@@ -22,24 +23,15 @@
     <div class="col-auto">
       <label class="sr-only" for="inlineFormInputGroup">Password</label>
       <div class="input-group">
-        <div class="input-group-prepend">
-          <div class="input-group-text">Passsword</div>
-        </div>
         <input type="password" class="form-control" id="inlineFormInputGroup" placeholder="password" name="password">
       </div>
     </div>
-    {{-- <div class="col-auto">
-      <div class="form-check m-0">
-        <input class="form-check-input" type="checkbox" id="autoSizingCheck">
-        <label class="form-check-label" for="autoSizingCheck">
-          Ricordami
-        </label>
-      </div>
-    </div> --}}
     <div class="col-auto">
       <button type="submit" class="btn btn-primary">Invia</button>
     </div>
   </div>
 </form>
+
+</div>
 
 @endsection
