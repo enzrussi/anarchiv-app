@@ -17,7 +17,7 @@
     @csrf
     <input type="hidden" name="perid" value="{{$perid}}">
     <div>
-        <fieldset aria-label="Form disabilitato">
+        <fieldset aria-label="Form Cambio Password">
         <div class='pt-5 pb-5'>
           <legend>Cambio Password</legend>
         </div>

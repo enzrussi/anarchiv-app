@@ -1,6 +1,14 @@
 @extends('base')
 
 @section('content')
+
+<div class='row mt-3'>
+<div class='col-sm'><h3>Gestione Utenti</h3></div>
+<div class='col-sm'></div>
+<div class="col-sm">
+  <a class="btn btn-primary" href="{{route('user.create')}}">Crea Nuovo Utente</a>
+</div>
+</div>
 <table class="table table-striped">
     <thead>
       <tr>
@@ -26,4 +34,8 @@
       @endforeach
     </tbody>
   </table>
+</div>
+
+
+
 @endsection

@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{env('APP_NAME')}}</title>
     <link rel="stylesheet" href="{{asset('css/bootstrap-italia.min.css')}}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" crossorigin="anonymous"></script>
-    <script src="{{asset('js/bootstrap-italia.min.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" crossorigin="anonymous"></script> --}}
+    <script src="{{asset('js/bootstrap-italia.bundle.min.js')}}"></script>
 </head>
 <body>
 
@@ -21,21 +21,36 @@
                 <a class="d-none d-lg-block navbar-brand" href="#">D.I.G.O.S. Trento - Anarchiv</a>
                 <div class="nav-mobile">
                   <nav>
-                    <a class="it-opener d-lg-none" data-toggle="collapse" href="#menu1" role="button" aria-expanded="false" aria-controls="menu1">
-                      <span>D.I.G.O.S. Trento - Anarchiv</span>
-                      <svg class="icon">
-                        <use xlink:href="/bootstrap-italia/dist/svg/sprite.svg#it-expand"></use>
-                      </svg>
-                    </a>
-                    <div class="link-list-wrapper collapse" id="menu1">
-                      <ul class="link-list">
-                        @auth('admin')<li><a class="list-item" href="{{route('user.index')}}">Gestione Utenti Autorizzati</a></li>@endauth
-                        @auth<li><a class="list-item active" href="#">Link 2 Active</a></li>@endauth
-                      </ul>
-                    </div>
+
                   </nav>
                 </div>
                 <div class="it-header-slim-right-zone">
+                  @auth('admin')
+                  <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                              AMMINISTRAZIONE APP
+                              <svg class="icon d-none d-lg-block"><use xlink:href="{{asset('/svg/sprite.svg#it-expand')}}"></use></svg>
+                        </a>
+                            <div class="dropdown-menu">
+                            <div class="row">
+                            <div class="col-12">
+                              <div class="link-list-wrapper">
+                                <ul class="link-list">
+                                  <li>
+                                    <h3 class="no_toc" id="heading-es-1">Utenti</h4>
+                                  </li>
+                                  <li><a class="list-item" href="{{route('user.index')}}"><span>Gestione Utenti</span></a></li>
+                                  <li>
+                                    <h3 class="no_toc" id="heading-es-1">Database</h4>
+                                  </li>
+                                  <li><a class="list-item" href="{{route('group.index')}}"><span>Gestione Gruppi</span></a></li>
+                                </ul>
+                              </div>
+                            </div>
+                            </div>
+                            </div>
+                          </div>
+                  @endauth
                     @auth
                     <div class="it-access-top-wrapper">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -74,7 +89,7 @@
       <div class='container'>
           {{-- ALERT --}}
             @if(session('alerttype'))
-            <div class="alert alert-{{session('alerttype')}}" role="alert">
+            <div class="alert alert-{{session('alerttype')}} mt-2" role="alert">
             {{session('alertmessage')}}
             </div>
             @endif

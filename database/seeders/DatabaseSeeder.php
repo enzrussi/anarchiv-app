@@ -20,5 +20,7 @@ class DatabaseSeeder extends Seeder
             'admin'=> 1,
 
         ]);
+
+        \App\Models\Group::factory()->make();
     }
 }
