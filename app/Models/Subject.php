@@ -19,27 +19,27 @@ class Subject extends Model
 
     public function groups(){
 
-        return $this->belongsToMany('App\Model\Group');
+        return $this->belongsToMany('App\Models\Group');
     }
 
     public function places(){
-        return $this->hasMany('App\Model\Place');
+        return $this->hasMany('App\Models\Place');
     }
 
     public function veichless(){
-        return $this->hasMany('App\Model\Vehicle');
+        return $this->hasMany('App\Models\Vehicle');
     }
 
     public function contacts(){
-        return $this->hasMany('App\Model\Contact');
+        return $this->hasMany('App\Models\Contact');
     }
 
     public function photos(){
-        return $this->hasMany('App\Model\Photo');
+        return $this->hasMany('App\Models\Photo');
     }
 
     public function notes(){
-        return $this->hasMany('App\Model\Note');
+        return $this->hasMany('App\Models\Note');
     }
 
 }

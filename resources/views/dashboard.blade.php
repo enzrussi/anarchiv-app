@@ -15,14 +15,25 @@
               </svg>
               <span class="text">Soggetti</span>
             </div>
-            <a href="#">
-              <h5 class="card-title">Database di soggetti attenzionati dall'attività</h5>
-            </a>
-            <p class="card-text">Ricerca inserimento, modifica dati nel Database</p>
-            <div class="row">
-                <form action="" method="post">
+            <div class="mb-2">
+            <p><h5 class="card-title">Database di soggetti attenzionati dall'attività</h5><p>
+            </div>
+            <div class="form-row mt-2">
+                <form action="{{route('subject.indexsubject')}}" method="post">
+                    @csrf
                     <div class="form-group">
-                    <input class="form-control" type="text" name="" id="">
+                        <div class="bootstrap-select-wrapper">
+                            <label>Trova per :</label>
+                        <select title="Scegli una opzione" name="field">
+                            <option value="surname">Cognome</option>
+                            <option value="name">Nome</option>
+                            <option value="cuicode">Codice CUi</option>
+                        </select>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                    <input class="form-control" type="text" name="criteria" id="textcriteria" placeholder="Inserire criterio da ricercare">
+                    <label for="textcriteria">uguale a :</label>
                             <button type="submit" class="btn btn-primary btn-sm mt-1">Ricerca</button>
                             <a class="btn btn-primary btn-sm mt-1"href="{{route('subject.create')}}">Inserimento Nuovo</a>
                     </form>

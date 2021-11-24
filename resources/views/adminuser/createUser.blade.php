@@ -17,7 +17,7 @@
 @endif
 
 {{-- form create user --}}
-
+@can('edit_settings')
 <form action="{{route('user.store')}}" method="POST">
     @csrf
     <fieldset aria-label="Crea Nuovo Utente">
@@ -50,7 +50,7 @@
             <a class="btn btn-primary mt-3" href="{{route('user.index')}}">Annulla</a>
     </form>
 
-
+@endcan
 
 
 @endsection

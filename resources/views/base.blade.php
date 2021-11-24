@@ -18,14 +18,15 @@
           <div class="row">
             <div class="col-12">
               <div class="it-header-slim-wrapper-content">
-                <a class="d-none d-lg-block navbar-brand" href="#">D.I.G.O.S. Trento - Anarchiv</a>
+                <a class="d-none d-lg-block navbar-brand" href="{{route('dashboard')}}">D.I.G.O.S. Trento - Anarchiv</a>
                 <div class="nav-mobile">
                   <nav>
 
                   </nav>
                 </div>
                 <div class="it-header-slim-right-zone">
-                  @auth('admin')
+                  @auth('')
+                  @can('edit_settings')
                   <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                               AMMINISTRAZIONE APP
@@ -50,6 +51,7 @@
                             </div>
                             </div>
                           </div>
+                          @endcan
                   @endauth
                     @auth
                     <div class="it-access-top-wrapper">
@@ -65,11 +67,8 @@
                             <div class="link-list-wrapper">
                               <ul class="link-list">
                                 <li><a class="list-item" href="{{route('logout')}}"><span>Logout</span></a></li>
-                                @auth('authuser')
+                                @auth
                                 <li><a class="list-item" href="{{route('changepassword',Auth::user()->perid)}}"><span>Cambio Password</span></a></li>
-                                @endauth
-                                @auth('admin')
-                                <li><a class="list-item" href="{{route('adminchangepassword',Auth::user()->perid)}}"><span>Cambio Password</span></a></li>
                                 @endauth
                               </ul>
                             </div>

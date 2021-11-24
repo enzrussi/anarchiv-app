@@ -20,12 +20,6 @@
       <div class="primary-bg p-3 mb-1">
         <p class="mb-0 white-color"> Inserimento Nuovo Soggetto</p>
       </div>
-      {{-- <div class="neutral-1-bg-a7 p-3 mb-1">
-        <p class="mb-0 white-color">Dolor sit</p>
-      </div>
-      <div class="primary-bg p-3 affix-top">
-        <p class="mb-0 white-color">Affix top</p>
-      </div> --}}
     </div>
     <div class="col-6 col-md-9 p-2">
         <form action="{{route('subject.store')}}" method="post">

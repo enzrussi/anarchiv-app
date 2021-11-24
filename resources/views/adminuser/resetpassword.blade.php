@@ -14,6 +14,9 @@
     </div>
 @endif
 
+@can('edit_settings')
+
+
 <div>
     <form action="{{route('user.updatepassword',$id)}}" method="post">
         @csrf
@@ -28,9 +31,12 @@
             <label for="password_confirmation">Conferma Nuova Password</label>
         </div>
         <button type="submit" name="submit" class="btn btn-primary mt-3">Cambia Password</button>
+        <a class="btn btn-primary mt-3" href="{{route('user.index')}}">Annulla</a>
     </fieldset>
     </form>
 
 </div>
 
+
+@endcan
 @endsection

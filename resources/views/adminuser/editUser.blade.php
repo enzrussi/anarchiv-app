@@ -15,6 +15,8 @@
 @endif
 
 {{-- form edit user --}}
+@can('edit_settings')
+
 
 <form action="{{route('user.update',$user->id)}}" method="POST">
 @csrf
@@ -53,6 +55,6 @@
     onclick="return confirm('Sei sicuro di voler eminare l\'utente?')">Elimina Utente</button>
 </form>
 
-
+@endcan
 
 @endsection

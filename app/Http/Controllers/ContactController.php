@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Contact;
+use App\Models\Subject;
+use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
@@ -21,9 +24,12 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         //
+        $subject = Subject::find($id);
+
+        return view('contact.createContact',['subject'=>$subject]);
     }
 
     /**
@@ -35,7 +41,24 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         //
-    }
+        $validate = $request->validate([
+            'contact' => 'required',
+            'relationship' => 'required',
+            'note' => 'max:150'
+        ]);
+
+        $subject = Subject::find($request->subject_id);
+
+        $subject->contacts()->create([
+            'contact' => $request->contact,
+            'contacttype' => $request->contacttype,
+            'relationship' => $request->relationship,
+            'note' => $request->note,
+            'updatedfrom' => Auth::user()->name
+        ]);
+
+        return redirect()->route('subject.show',['id'=>$request->subject_id]);
+   }
 
     /**
      * Display the specified resource.

@@ -18,14 +18,9 @@ class AuthController extends Controller
         $perid = $request->perid;
         $password = $request->password;
 
-        if (Auth::guard('admin')->attempt(['perid'=> $perid,'password'=> $password, 'admin' => 1])){
+        if (Auth::attempt(['perid'=> $perid,'password'=> $password])){
             // Authentication passed...
-            return redirect('admindashboard');
-
-        }elseif (Auth::guard('authuser')->attempt(['perid' => $perid, 'password' => $password, 'admin' => 0])){
-
             return redirect('dashboard');
-
         }else{
             $request->session()->regenerate();
 
@@ -37,8 +32,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-        Auth::guard('admin')->logout();
-        Auth::guard('authuser')->logout();
+
 
         $request->session()->invalidate();
 
@@ -70,21 +64,13 @@ class AuthController extends Controller
         }else{
             $alert = [
                 'type'=>'warning',
-                'message' => 'Password non modificata! <br> Probabilmente hai sbagliato la vecchia Password'
+                'message' => 'Password non modificata!Probabilmente hai sbagliato la vecchia Password'
             ];
         }
 
 
-
-
-        if(Auth::guard('admin')->check()){
-
-            return redirect('admindashboard')->with('alerttype',$alert['type'])->with('alertmessage',$alert['message']);
-
-        }elseif(Auth::guard('authuser')->check()){
-
             return redirect('dashboard')->with('alerttype',$alert['type'])->with('alertmessage',$alert['message']);
-        }
+
 
     }
 }

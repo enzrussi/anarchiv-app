@@ -13,7 +13,7 @@
 @endif
 <div class="mx-auto text-white text-center mt-2" style="width: 800px;">
 
-<form action="{{route('verifyUser')}}"" method="POST">
+<form action="{{route('verifyUser')}}" method="POST">
     @csrf
 <div class="form-row align-items-center">
     <div class="col-auto">

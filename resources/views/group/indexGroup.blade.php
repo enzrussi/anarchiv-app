@@ -3,6 +3,8 @@
 
 @section('content')
 
+    @can('edit_settings')
+
     @if($errors->any())
         <div class='alert alert-danger'>
         <ul>
@@ -88,7 +90,7 @@
        </div>
     </div>
  </div>
-
+@endcan
 
 
 

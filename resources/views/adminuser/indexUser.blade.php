@@ -2,6 +2,9 @@
 
 @section('content')
 
+@can('edit_settings')
+
+
 <div class='row mt-3'>
 <div class='col-sm'><h3>Gestione Utenti</h3></div>
 <div class='col-sm'></div>
@@ -37,5 +40,5 @@
 </div>
 
 
-
+@endcan
 @endsection

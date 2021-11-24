@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Subject;
+use App\Models\Contact;
+use App\Models\Group;
+use App\Models\Note;
+use App\Models\Photo;
+use App\Models\Place;
+use App\Models\Vehicle;
 use Illuminate\Support\Facades\Auth;
 
 class SubjectController extends Controller
@@ -67,7 +73,9 @@ class SubjectController extends Controller
     {
         //
         $subject = Subject::find($id);
-        return $subject;
+        $groups = Group::all();
+
+        return view('subject.showSubject',['subject' => $subject, 'groups' => $groups]);
     }
 
     /**
@@ -103,4 +111,26 @@ class SubjectController extends Controller
     {
         //
     }
+
+    public function indexSubject(Request $request){
+
+        $subject = Subject::where($request->field,'like', $request->criteria)->get();
+        return view('subject.indexSubject',['subject' => $subject]);
+
+    }
+
+    public function attachGroup($id,$group_id){
+
+        $subject = Subject::find($id);
+        $subject->groups()->attach($group_id);
+        return redirect()->route('subject.show',$subject->id);
+
+    }
+
+    public function detachGroup($id,$group_id){
+        $subject = Subject::find($id);
+        $subject->groups()->detach($group_id);
+        return redirect()->route('subject.show',$subject->id);
+    }
+
 }
