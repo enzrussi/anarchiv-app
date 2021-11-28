@@ -57,7 +57,7 @@ class ContactController extends Controller
             'updatedfrom' => Auth::user()->name
         ]);
 
-        return redirect()->route('subject.show',['id'=>$request->subject_id]);
+        return redirect()->route('subject.show',$request->subject_id)->with('tab',2);
    }
 
     /**
@@ -69,6 +69,7 @@ class ContactController extends Controller
     public function show($id)
     {
         //
+
     }
 
     /**
@@ -80,6 +81,10 @@ class ContactController extends Controller
     public function edit($id)
     {
         //
+        $contact = Contact::find($id);
+
+        return view('contact.editContact',['contact' => $contact]);
+
     }
 
     /**
@@ -92,7 +97,23 @@ class ContactController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validate = $request->validate([
+            'contact'=>'required',
+            'note'=> 'max:255'
+        ]);
+
+        $contact = Contact::find($id);
+        $contact->contact = $request->contact;
+        $contact->contacttype = $request->contacttype;
+        $contact->note = $request->note;
+        $contact->updatedfrom = Auth::user()->name;
+        $contact->save();
+
+        return redirect()->route('subject.show',$contact->subject_id)->with('tab',2);
+
+
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -103,5 +124,9 @@ class ContactController extends Controller
     public function destroy($id)
     {
         //
+        $contact = Contact::find($id);
+        $contact->delete();
+
+       return redirect()->route('subject.show',$contact->subject_id)->with('tab',2);
     }
 }

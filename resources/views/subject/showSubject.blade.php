@@ -17,12 +17,14 @@
 <div>
   <ul class="nav nav-tabs nav-tabs-icon-text" id="myTab3" role="tablist">
     <li class="nav-item">
-      <a class="nav-link active" id="tab1c-tab" data-toggle="tab" href="#tab1b" role="tab" aria-controls="tab1b" aria-selected="true">
+      <a class="nav-link {{session('tab')==1 || session('tab')==null? 'active':null}}" id="tab1c-tab" data-toggle="tab" href="#tab1b" role="tab" aria-controls="tab1b"
+       aria-selected="{{session('tab')==1 || session('tab')==null?'true':'false'}}">
         <svg class="icon icon-primary"><use xlink:href="{{asset('svg/sprite.svg')}}#it-link"></use></svg> Dati Anagrafici
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="tab2b-tab" data-toggle="tab" href="#tab2b" role="tab" aria-controls="tab2b" aria-selected="false">
+      <a class="nav-link {{session('tab')==2?'active':null}}" id="tab2b-tab" data-toggle="tab" href="#tab2b" role="tab" aria-controls="tab2b"
+      aria-selected="{{session('tab')==2?'true':'false'}}">
        <svg class="icon icon-primary"><use xlink:href="{{asset('svg/sprite.svg')}}#it-link"></use></svg> Contatti
       </a>
     </li>
@@ -47,8 +49,10 @@
       </a>
     </li>
   </ul>
+
   <div class="tab-content" id="myTab3Content">
-    <div class="tab-pane p-4 fade show active" id="tab1b" role="tabpanel" aria-labelledby="tab1c-tab">
+    {{-- anagraphic  --}}
+    <div class="tab-pane p-4 fade {{session('tab')==1 || session('tab')==null ? 'show active':null}}" id="tab1b" role="tabpanel" aria-labelledby="tab1c-tab">
       <div class="row">
         <div class="col-8 col-lg-8">
           <!--start card-->
@@ -123,42 +127,73 @@
           </div>
       </div>
     </div>
+    {{-- Contact --}}
+    <div class="tab-pane p-4 fade {{session('tab')==2? 'show active':null}}" id="tab2b" role="tabpanel" aria-labelledby="tab2b-tab">
 
-    <div class="tab-pane p-4 fade" id="tab2b" role="tabpanel" aria-labelledby="tab2b-tab">
-      <div class="row mb-3">
-        <div class="col-8 border-bottom bg-primary text-white">
-          <span class="text-uppercase font-weight-bold">{{$subject->surname}} </span>
-          <span class="text-capitalize font-weight-bold">{{$subject->name}} </span>
-          <span> nato a </span><span class="text-capitalize">{{$subject->placebirth}} </span>
-          <span> in data </span><span>{{$subject->birthdate}}</span>
-        </div>
-        <div class="col-4 text-right"><a class="btn btn-primary btn-sm" href="{{route('contact.create',$subject->id)}}">Inserisci Nuovo</a></div>
-      </div>
-
-      @foreach ($subject->contacts as $c )
-
-      <div class="row shadow p-3 mb-5 bg-white ">
-            <div class="col-8 ">
-            <p><span class="font-weight-bold">{{$c->contacttype}}: {{$c->contact}}</span>
-                <span> tipo di relazione: {{$c->relationship}}</span></p>
-                <p>
-                <span style="font-size: small;"> dato aggiornato il {{$c->updated_at}} da {{$c->updatedfrom}} </span>
-            </p>
-            <p><span class="text-justify">Note: {{$c->note}}</span></p>
+            {{-- header tab --}}
+            <div class="row mb-3">
+            <div class="col-8 border-bottom bg-primary text-white">
+            <span class="text-uppercase font-weight-bold">{{$subject->surname}} </span>
+            <span class="text-capitalize font-weight-bold">{{$subject->name}} </span>
+            <span> nato a </span><span class="text-capitalize">{{$subject->placebirth}} </span>
+            <span> in data </span><span>{{$subject->birthdate}}</span>
             </div>
-            <div class="text-right col-4"><a class="btn btn-sm" href="{{route('contact.edit',$c->id)}}">
-                <svg class="icon"><use xlink:href="{{asset('svg/sprite.svg')}}#it-pencil"></use></svg>
-            </a></div>
-
+            <div class="col-4 text-right"><a class="btn btn-primary btn-sm" href="{{route('contact.create',$subject->id)}}">Inserisci Nuovo</a></div>
         </div>
-        @endforeach
-      </div>
 
+        {{-- content tab --}}
 
+        @foreach ($subject->contacts as $c )
+
+                <div class="row shadow p-3 mb-5 bg-white ">
+                        <div class="col-8 ">
+                        <p><span class="font-weight-bold">{{$c->contacttype}}: {{$c->contact}}</span>
+                            <span> tipo di relazione: {{$c->relationship}}</span></p>
+                            <p>
+                            <span style="font-size: small;"> dato aggiornato il {{$c->updated_at}} da {{$c->updatedfrom}} </span>
+                        </p>
+                        <p><span class="text-justify">Note: {{$c->note}}</span></p>
+                        </div>
+                        <div class="text-right col-4"><a class="btn btn-sm" href="{{route('contact.edit',$c->id)}}">
+                            <svg class="icon"><use xlink:href="{{asset('svg/sprite.svg')}}#it-pencil"></use></svg>
+                        </a>
+                        <button type="button" class="btn" data-toggle="modal" data-target="#confirmDeleteContactModal{{$c->id}}">
+                            <svg class="icon"><use xlink:href="{{asset('svg/sprite.svg')}}#it-delete"></use></svg>
+                        </button>
+                        </div>
+                    </div>
+            {{--  Confirm delete contact Modal--}}
+                    <div class="it-example-modal">
+                        <div class="modal" tabindex="-1" role="dialog" id="confirmDeleteContactModal{{$c->id}}">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Conferma Eliminazione Contatto
+                                    </h5>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Sei sicuro di voler eliminare il contatto?.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-outline-primary btn-sm" type="button" data-dismiss="modal">Annulla</button>
+                                    <form action="{{route('contact.destroy',$c->id)}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn  btn-primary btn-sm">OK</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+            @endforeach
+    </div>
+    {{-- Veicles --}}
     <div class="tab-pane p-4 fade" id="tab3b" role="tabpanel" aria-labelledby="tab3b-tab"><p>Contenuto 3</p></div>
     <div class="tab-pane p-4 fade" id="tab4b" role="tabpanel" aria-labelledby="tab4b-tab">Contenuto 4</div>
   </div>
-
+</div>
+{{--  windows Modal --}}
 
 
 
