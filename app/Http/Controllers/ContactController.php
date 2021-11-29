@@ -57,7 +57,7 @@ class ContactController extends Controller
             'updatedfrom' => Auth::user()->name
         ]);
 
-        return redirect()->route('subject.show',$request->subject_id)->with('tab',2);
+        return redirect()->route('subject.show',['id'=>$request->subject_id,'tab'=>2]);
    }
 
     /**
@@ -127,6 +127,6 @@ class ContactController extends Controller
         $contact = Contact::find($id);
         $contact->delete();
 
-       return redirect()->route('subject.show',$contact->subject_id)->with('tab',2);
+       return redirect()->route('subject.show',['id'=>$contact->subject_id,'tab' => 2]);
     }
 }

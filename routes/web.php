@@ -70,7 +70,11 @@ Route::resource('group', GroupController::class)->middleware('auth');
 
 // Subject -----------------------------------------------------------------------------------------------------------------
 Route::group(['middleware'=>'auth'],function () {
-    Route::resource('subject', SubjectController::class);
+
+    Route::get('subject/create',[SubjectController::class,'create'])->name('subject.create');
+    Route::post('subject/store',[SubjectController::class,'store'])->name('subject.store');
+    Route::get('subject/{id}/{tab}',[SubjectController::class,'show'])->name('subject.show');
+
     Route::get('subject/attachgroup/{id}/{group_id}',[SubjectController::class,'attachGroup'])->name('subject.attachgroup');
     Route::get('subject/detachgroup/{id}/{group_id}',[SubjectController::class,'detachGroup'])->name('subject.detachgroup');
     Route::post('subject/indexsubject',[SubjectController::class,'indexSubject'])->name('subject.indexsubject');
@@ -84,6 +88,16 @@ Route::middleware(['auth'])->group(function () {
     Route::post('contact/store',[ContactController::class,"store"])->name('contact.store');
     Route::put('contact/update/{id}',[ContactController::class,'update'])->name('contact.update');
     Route::delete('contact/delete/{id}',[ContactController::class,'destroy'])->name('contact.destroy');
+
+});
+
+// Vehicle --------------------------------------------------------------------------------------------------------------
+Route::middleware(['auth'])->group(function () {
+    Route::get('vehicle/create/{id}',[VehicleController::class,'create'])->name('vehicle.create');
+    Route::post('vehicle/store/{id}',[VehicleController::class,'store'])->name('vehicle.store');
+    Route::get('vehicle/edit/{id}',[VehicleController::class,'edit'])->name('vehicle.edit');
+    Route::put('vehicle/update/{id}',[VehicleController::class,'update'])->name('vehicle.update');
+    Route::delete('vehicle/delete/{id}',[VehicleController::class,'destroy'])->name('vehicle.destroy');
 
 });
 

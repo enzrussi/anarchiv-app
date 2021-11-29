@@ -17,19 +17,20 @@
 <div>
   <ul class="nav nav-tabs nav-tabs-icon-text" id="myTab3" role="tablist">
     <li class="nav-item">
-      <a class="nav-link {{session('tab')==1 || session('tab')==null? 'active':null}}" id="tab1c-tab" data-toggle="tab" href="#tab1b" role="tab" aria-controls="tab1b"
-       aria-selected="{{session('tab')==1 || session('tab')==null?'true':'false'}}">
+      <a class="nav-link {{$tab==1 || $tab==null? 'active':null}}" id="tab1c-tab" data-toggle="tab" href="#tab1b" role="tab" aria-controls="tab1b"
+       aria-selected="{{$tab==1 || $tab==null?'true':'false'}}">
         <svg class="icon icon-primary"><use xlink:href="{{asset('svg/sprite.svg')}}#it-link"></use></svg> Dati Anagrafici
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {{session('tab')==2?'active':null}}" id="tab2b-tab" data-toggle="tab" href="#tab2b" role="tab" aria-controls="tab2b"
-      aria-selected="{{session('tab')==2?'true':'false'}}">
+      <a class="nav-link {{$tab==2?'active':null}}" id="tab2b-tab" data-toggle="tab" href="#tab2b" role="tab" aria-controls="tab2b"
+      aria-selected="{{$tab==2?'true':'false'}}">
        <svg class="icon icon-primary"><use xlink:href="{{asset('svg/sprite.svg')}}#it-link"></use></svg> Contatti
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="tab3b-tab" data-toggle="tab" href="#tab3b" role="tab" aria-controls="tab3b" aria-selected="false">
+      <a class="nav-link {{$tab==3?'active':null}}" id="tab3b-tab" data-toggle="tab" href="#tab3b" role="tab" aria-controls="tab3b"
+       aria-selected="{{$tab==3?'true':'false'}}">
         <svg class="icon icon-primary"><use xlink:href="{{asset('svg/sprite.svg')}}#it-link"></use></svg> Veicoli
       </a>
     </li>
@@ -52,7 +53,7 @@
 
   <div class="tab-content" id="myTab3Content">
     {{-- anagraphic  --}}
-    <div class="tab-pane p-4 fade {{session('tab')==1 || session('tab')==null ? 'show active':null}}" id="tab1b" role="tabpanel" aria-labelledby="tab1c-tab">
+    <div class="tab-pane p-4 fade {{$tab==1 || $tab==null ? 'show active':null}}" id="tab1b" role="tabpanel" aria-labelledby="tab1c-tab">
       <div class="row">
         <div class="col-8 col-lg-8">
           <!--start card-->
@@ -128,7 +129,7 @@
       </div>
     </div>
     {{-- Contact --}}
-    <div class="tab-pane p-4 fade {{session('tab')==2? 'show active':null}}" id="tab2b" role="tabpanel" aria-labelledby="tab2b-tab">
+    <div class="tab-pane p-4 fade {{$tab==2? 'show active':null}}" id="tab2b" role="tabpanel" aria-labelledby="tab2b-tab">
 
             {{-- header tab --}}
             <div class="row mb-3">
@@ -189,7 +190,68 @@
             @endforeach
     </div>
     {{-- Veicles --}}
-    <div class="tab-pane p-4 fade" id="tab3b" role="tabpanel" aria-labelledby="tab3b-tab"><p>Contenuto 3</p></div>
+    <div class="tab-pane p-4 fade {{$tab==3? 'show active':null}}" id="tab3b" role="tabpanel" aria-labelledby="tab3b-tab">
+     {{-- header tab --}}
+     <div class="row mb-3">
+        <div class="col-8 border-bottom bg-primary text-white">
+        <span class="text-uppercase font-weight-bold">{{$subject->surname}} </span>
+        <span class="text-capitalize font-weight-bold">{{$subject->name}} </span>
+        <span> nato a </span><span class="text-capitalize">{{$subject->placebirth}} </span>
+        <span> in data </span><span>{{$subject->birthdate}}</span>
+        </div>
+        <div class="col-4 text-right"><a class="btn btn-primary btn-sm" href="{{route('vehicle.create',$subject->id)}}">Inserisci Nuovo</a></div>
+    </div>
+
+    @foreach ($subject->veichless as $v )
+
+    <div class="row shadow p-3 mb-5 bg-white ">
+        <div class="col-8 ">
+        <p><span class="font-weight-bold">Targa:{{$v->plate}} </span>
+            <span>Modello:{{$v->model}} </span>
+            <span>Tipo di relazione: {{$v->relationship}}</span></p>
+            <p>
+            <span style="font-size: small;"> dato aggiornato il {{$v->updated_at}} da {{$v->updatedfrom}} </span>
+        </p>
+        <p><span class="text-justify">Note: {{$v->note}}</span></p>
+        </div>
+        <div class="text-right col-4"><a class="btn btn-sm" href="{{route('vehicle.edit',$v->id)}}">
+            <svg class="icon"><use xlink:href="{{asset('svg/sprite.svg')}}#it-pencil"></use></svg>
+        </a>
+        <button type="button" class="btn" data-toggle="modal" data-target="#confirmDeleteVehicleModal{{$v->id}}">
+            <svg class="icon"><use xlink:href="{{asset('svg/sprite.svg')}}#it-delete"></use></svg>
+        </button>
+        </div>
+    </div>
+{{--  Confirm delete contact Modal--}}
+    <div class="it-example-modal">
+        <div class="modal" tabindex="-1" role="dialog" id="confirmDeletevehicleModal{{$v->id}}">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Conferma Eliminazione Veicolo
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <p>Sei sicuro di voler eliminare il Veicolo?.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-primary btn-sm" type="button" data-dismiss="modal">Annulla</button>
+                    <form action="{{route('vehicle.destroy',$v->id)}}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn  btn-primary btn-sm">OK</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    @endforeach
+
+
+
+    </div>
     <div class="tab-pane p-4 fade" id="tab4b" role="tabpanel" aria-labelledby="tab4b-tab">Contenuto 4</div>
   </div>
 </div>

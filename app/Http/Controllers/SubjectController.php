@@ -69,13 +69,13 @@ class SubjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,$tab)
     {
         //
         $subject = Subject::find($id);
         $groups = Group::all();
 
-        return view('subject.showSubject',['subject' => $subject, 'groups' => $groups]);
+        return view('subject.showSubject',['subject' => $subject, 'groups' => $groups, 'tab' => $tab]);
     }
 
     /**
