@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Note;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NoteController extends Controller
 {
@@ -21,9 +23,10 @@ class NoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         //
+        return view('note.createNote',['id'=>$id]);
     }
 
     /**
@@ -35,6 +38,21 @@ class NoteController extends Controller
     public function store(Request $request)
     {
         //
+        $validate = $request->validate([
+            'description' => 'required',
+            'note' => 'required'
+        ]);
+
+        $note = new Note();
+
+        $note->description = $request->description;
+        $note->note = $request->note;
+        $note->subject_id = $request->subject_id;
+        $note->updatedfrom = Auth::User()->name;
+
+        $note->save();
+
+        return redirect()->route('subject.show',['id'=>$note->subject_id,'tab'=>5]);
     }
 
     /**

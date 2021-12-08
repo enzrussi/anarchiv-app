@@ -109,10 +109,11 @@ class ContactController extends Controller
         $contact->updatedfrom = Auth::user()->name;
         $contact->save();
 
-        return redirect()->route('subject.show',$contact->subject_id)->with('tab',2);
-
-
+        return redirect()->route('subject.show',['id'=>$contact->subject_id,'tab' => 2]);
     }
+
+
+
 
 
     /**

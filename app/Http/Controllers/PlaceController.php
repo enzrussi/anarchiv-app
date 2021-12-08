@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Place;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PlaceController extends Controller
 {
@@ -21,9 +23,10 @@ class PlaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         //
+        return view('place.createPlace',['id'=>$id]);
     }
 
     /**
@@ -35,6 +38,35 @@ class PlaceController extends Controller
     public function store(Request $request)
     {
         //
+        $validate = $request->validate([
+            'name' => 'required|max:100',
+            'address' => 'max:150',
+            'city' => 'max:50',
+            'zipcode'=>'max:15',
+            'relationship' => 'max:150',
+            'note' => 'max:255'
+        ]);
+
+        $place = new Place();
+
+        $place->fill([
+            'name'=>$request->name,
+            'address'=>$request->address,
+            'city' => $request->city,
+            'zipconde' => $request->zipcode,
+            'relationship' => $request->relationship,
+            'subject_id'=>$request->subject_id,
+            'updatedfrom'=> Auth::user()->name,
+            'note' => $request->note,
+
+        ]);
+
+        $place->save();
+
+        return redirect()->route('subject.show',['id'=>$request->subject_id,'tab'=>4]);
+
+
+
     }
 
     /**
@@ -57,6 +89,9 @@ class PlaceController extends Controller
     public function edit($id)
     {
         //
+        $place = Place::find($id);
+
+        return view('place.editPlace',['place'=>$place]);
     }
 
     /**
@@ -69,6 +104,28 @@ class PlaceController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $place = Place::find($id);
+
+        $validate = $request->validate([
+            'name' => 'required|max:100',
+            'address' => 'max:150',
+            'city' => 'max:50',
+            'zipcode'=>'max:15',
+            'relationship' => 'max:150',
+            'note' => 'max:255'
+        ]);
+
+        $place->name = $request->name;
+        $place->address = $request->address;
+        $place->city = $request->city;
+        $place->zipcode = $request->zipcode;
+        $place->relationship = $request->relationship;
+        $place->note = $request->note;
+        $place->updatedfrom = Auth::user()->name;
+        $place->save();
+
+        return redirect()->route('subject.show',['id'=>$place->subject_id,'tab'=>4]);
+
     }
 
     /**
@@ -80,5 +137,11 @@ class PlaceController extends Controller
     public function destroy($id)
     {
         //
+
+        $place = Place::find($id);
+        $place->delete();
+
+        return redirect()->route('subject.show',['id'=>$place->subject_id,'tab'=>4]);
+
     }
 }

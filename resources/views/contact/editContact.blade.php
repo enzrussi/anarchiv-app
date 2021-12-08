@@ -56,7 +56,7 @@
         <div class="form-row">
             <div class="form-group col text-right">
                 <button type="submit" class="btn btn-primary btn-sm">Salva</button>
-                <a href="{{route('subject.show',$contact->subject_id)}}" class="btn btn-outline-primary btn-sm">Annulla</a>
+                <a href="{{route('subject.show',['id'=>$contact->subject_id,'tab'=>2])}}" class="btn btn-outline-primary btn-sm">Annulla</a>
             </div>
 
         </div>

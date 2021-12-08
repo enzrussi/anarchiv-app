@@ -101,6 +101,28 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
+// Place ----------------------------------------------------------------------------------------------------------------
+Route::middleware(['auth'])->group(function(){
+
+    Route::get('place/create/{id}',[PlaceController::class,'create'])->name('place.create');
+    Route::post('place/store/{id}',[PlaceController::class,'store'])->name('place.store');
+    Route::get('place/edit/{id}',[PlaceController::class,'edit'])->name('place.edit');
+    Route::put('place/update/{id}',[PlaceController::class,'update'])->name('place.update');
+    Route::delete('place/delete/{id}',[PlaceController::class,'destroy'])->name('place.destroy');
+
+});
+
+// Note -----------------------------------------------------------------------------------------------------------------
+Route::middleware(['auth'])->group(function(){
+
+    Route::get('note/create/{id}',[NoteController::class,'create'])->name('note.create');
+    Route::post('note/store/',[NoteController::class,'store'])->name('note.store');
+    Route::get('note/edit/{id}',[NoteController::class,'edit'])->name('note.edit');
+    Route::put('note/update/{id}',[NoteController::class,'update'])->name('note.update');
+    Route::delete('note/destroy/{id}}',[NoteController::class,'destroy'])->name('note.destroy');
+
+
+});
 
 
 
