@@ -57,7 +57,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="tab6b-tab" data-toggle="tab" href="#tab6b" role="tab" aria-controls="tab6b"
+                {{-- <a class="nav-link" id="tab6b-tab" data-toggle="tab" href="#tab6b" role="tab" aria-controls="tab6b"
+                    aria-selected="false" aria-disabled="true" tabindex="-1">
+                    <svg class="icon icon-primary">
+                        <use xlink:href="{{ asset('svg/sprite.svg') }}#it-link"></use>
+                    </svg> Foto
+                </a> --}}
+                <a class="nav-link" id="tab6b-tab" href="{{route('photo.index',$subject->id)}}"
                     aria-selected="false" aria-disabled="true" tabindex="-1">
                     <svg class="icon icon-primary">
                         <use xlink:href="{{ asset('svg/sprite.svg') }}#it-link"></use>
@@ -171,8 +177,8 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Foto</h5>
-                                    <p class="card-text"><img src="{{ asset('svg/logo_welcome_polizia.jpg') }}"
-                                            class="img-thumbnail" alt="IMMAGINE PREDEFINITA"></p>
+                                    <p class="card-text"><img src="{{ asset('photo')}}/{{$subject->photo}}"
+                                            class="img-thumbnail" alt="IMMAGINE PREDEFINITA MANCANTE"></p>
                                 </div>
                             </div>
                         </div>
@@ -185,15 +191,16 @@
                 aria-labelledby="tab2b-tab">
 
                 {{-- header tab --}}
-                <div class="row mb-3">
-                    <div class="col-8 border-bottom bg-primary text-white">
+                <div class="row mb-3 ">
+                    <div class="col-8 border-bottom ">
+                        <div class="avatar size-xl"><img src="{{asset('photo').'/'.$subject->photo}}" alt="??"></div>
                         <span class="text-uppercase font-weight-bold">{{ $subject->surname }} </span>
                         <span class="text-capitalize font-weight-bold">{{ $subject->name }} </span>
                         <span> nato a </span><span class="text-capitalize">{{ $subject->placebirth }} </span>
                         <span> in data </span><span>{{ $subject->birthdate }}</span>
                     </div>
                     <div class="col-4 text-right"><a class="btn btn-primary btn-sm"
-                            href="{{ route('contact.create', $subject->id) }}">Inserisci Nuovo</a></div>
+                            href="{{ route('contact.create', $subject->id) }}">Inserisci Nuovo Contatto</a></div>
                 </div>
 
                 {{-- content tab --}}
@@ -257,14 +264,15 @@
                 aria-labelledby="tab3b-tab">
                 {{-- header tab --}}
                 <div class="row mb-3">
-                    <div class="col-8 border-bottom bg-primary text-white">
+                    <div class="col-8 border-bottom ">
+                        <div class="avatar size-xl"><img src="{{asset('photo').'/'.$subject->photo}}" alt="??"></div>
                         <span class="text-uppercase font-weight-bold">{{ $subject->surname }} </span>
                         <span class="text-capitalize font-weight-bold">{{ $subject->name }} </span>
                         <span> nato a </span><span class="text-capitalize">{{ $subject->placebirth }} </span>
                         <span> in data </span><span>{{ $subject->birthdate }}</span>
                     </div>
                     <div class="col-4 text-right"><a class="btn btn-primary btn-sm"
-                            href="{{ route('vehicle.create', $subject->id) }}">Inserisci Nuovo</a></div>
+                            href="{{ route('vehicle.create', $subject->id) }}">Inserisci Nuovo Veicolo</a></div>
                 </div>
 
                 {{-- content tab --}}
@@ -331,14 +339,15 @@
 
                 {{-- header tab --}}
                 <div class="row mb-3">
-                    <div class="col-8 border-bottom bg-primary text-white">
+                    <div class="col-8 border-bottom">
+                        <div class="avatar size-xl"><img src="{{asset('photo').'/'.$subject->photo}}" alt="??"></div>
                         <span class="text-uppercase font-weight-bold">{{ $subject->surname }} </span>
                         <span class="text-capitalize font-weight-bold">{{ $subject->name }} </span>
                         <span> nato a </span><span class="text-capitalize">{{ $subject->placebirth }} </span>
                         <span> in data </span><span>{{ $subject->birthdate }}</span>
                     </div>
                     <div class="col-4 text-right"><a class="btn btn-primary btn-sm"
-                            href="{{ route('place.create', $subject->id) }}">Inserisci Nuovo</a>
+                            href="{{ route('place.create', $subject->id) }}">Inserisci Nuovo Luogo</a>
                     </div>
                 </div>
                 {{-- Place --}}
@@ -406,14 +415,16 @@
 
                 {{-- header tab --}}
                 <div class="row mb-3">
-                    <div class="col-8 border-bottom bg-primary text-white">
+                    <div class="col-8 border-bottom  ">
+                        <div class="avatar size-xl"><img src="{{asset('photo').'/'.$subject->photo}}" alt="??"></div>
                         <span class="text-uppercase font-weight-bold">{{ $subject->surname }} </span>
                         <span class="text-capitalize font-weight-bold">{{ $subject->name }} </span>
                         <span> nato a </span><span class="text-capitalize">{{ $subject->placebirth }} </span>
                         <span> in data </span><span>{{ $subject->birthdate }}</span>
+
                     </div>
                     <div class="col-4 text-right"><a class="btn btn-primary btn-sm"
-                            href="{{ route('note.create', $subject->id) }}">Inserisci Nuovo</a>
+                            href="{{ route('note.create', $subject->id) }}">Inserisci Nuova Nota</a>
                     </div>
                 </div>
 
@@ -423,9 +434,9 @@
 
                     <div class="row shadow p-3 mb-5 bg-white ">
                         <div class="col-8">
-                        <p>Descrzione: <span class="font-weight-bold">{{$note->description}}</span></p>
+                        <p>Descrizione: <span class="font-weight-bold">{{$note->description}}</span></p>
                         <p style="font-size:x-small">Aggiornato il {{$note->updated_at}} da {{$note->updatedfrom}}</p>
-                        <p>{{$note->note}}</p>
+                        <p class="text-justify">{{$note->note}}</p>
                         </div>
                         <div class="col-4 text-right">
                                 <a href="{{ route('note.edit', $note->id) }}" class="btn">
@@ -467,6 +478,7 @@
                     </div>
                     @endforeach
                 </div>
+
 
 
 

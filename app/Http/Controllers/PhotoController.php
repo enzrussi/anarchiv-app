@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Photo;
+use App\Models\Subject;
+use DateTime;
+use Illuminate\Support\Facades\Auth;
+
 
 class PhotoController extends Controller
 {
@@ -11,9 +16,15 @@ class PhotoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+
+
+    public function index($id)
     {
         //
+        $subject = Subject::find($id);
+
+        return view('photo.indexPhoto',['subject'=>$subject]);
     }
 
     /**
@@ -32,9 +43,36 @@ class PhotoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
         //
+        $validate = $request->validate([
+            'url'=>'required|file|mimes:jpg'
+        ],$messages=[
+            'url.required' => 'E\' richiesto almeno un file',
+            'mimes' => 'Il file immagine deve essere .jpg'
+        ]);
+
+        $photodir = $_SERVER['DOCUMENT_ROOT'].'\\photo\\';
+
+        $date = new DateTime();
+
+        $photofilename = $request->subject_id.'s'.strval($date->getTimestamp()).".jpg";
+
+        move_uploaded_file($_FILES['url']['tmp_name'],$photodir.$photofilename);
+
+        $photo = new Photo();
+        $photo->url = $photofilename;
+        $photo->description = $request->description;
+        $photo->note = $request->note;
+        $photo->updatedfrom = Auth::User()->name;
+        $photo->subject_id=$request->subject_id;
+
+        $photo->save();
+
+        return redirect()->route('photo.index',['id'=>$photo->subject_id]);
+
+
     }
 
     /**
@@ -46,6 +84,10 @@ class PhotoController extends Controller
     public function show($id)
     {
         //
+        $photo = Photo::find($id);
+
+        return view('photo.showPhoto',['photo'=>$photo]);
+
     }
 
     /**
@@ -69,6 +111,23 @@ class PhotoController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validate = $request->validate([
+            'description'=>'required'
+        ],$messages = [
+            'description.required'=> 'Inserire una Descrizione.'
+
+        ]);
+
+        $photo = Photo::find($id);
+        $photo->description = $request->description;
+        $photo->note = $request->note;
+        $photo->updatedfrom = Auth::User()->name;
+
+        $photo->save();
+
+        return redirect()->route('photo.show',$photo->id);
+
+
     }
 
     /**
@@ -80,5 +139,33 @@ class PhotoController extends Controller
     public function destroy($id)
     {
         //
+        $photo = Photo::find($id);
+
+        $photodir = $_SERVER['DOCUMENT_ROOT'].'\\photo\\';
+        unlink($photodir.$photo->url);
+        $photo->delete();
+
+        $subject = Subject::where('subject_id',$photo->subject_id)->get();
+
+        return redirect()->route('photo.index',$photo->subject_id);
+
+
+
     }
+
+    /**
+     * insert the profile photo in subject
+     */
+
+     public function updatephotosubject($id){
+
+        $photo = Photo::find($id);
+
+        $photo->subject->photo = $photo->url;
+        $photo->subject->save();
+
+        return redirect()->route('photo.show',$photo->id);
+
+
+     }
 }

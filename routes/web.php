@@ -125,5 +125,18 @@ Route::middleware(['auth'])->group(function(){
 });
 
 
+// Photo ---------------------------------------------------------------------------------------------------------------
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('photo/{id}',[PhotoController::class,'index'])->name('photo.index');
+    Route::post('photo/store/{id}',[PhotoController::class,'store'])->name('photo.store');
+    Route::get('photo/show/{id}',[PhotoController::class,'show'])->name('photo.show');
+    Route::put('photo/update/{id}',[PhotoController::class,'update'])->name('photo.update');
+    Route::delete('photo/destroy/{id}',[PhotoController::class,'destroy'])->name('photo.destroy');
+    Route::get('photo/updatephotosubject/{id}',[PhotoController::class,'updatephotosubject'])->name('photo.updatephotosubject');
+
+});
+
+
 
 
