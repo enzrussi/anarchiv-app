@@ -87,6 +87,8 @@ class SubjectController extends Controller
     public function edit($id)
     {
         //
+        $subject = Subject::find($id);
+        return view('subject.editSubject',['subject'=>$subject]);
     }
 
     /**
@@ -99,6 +101,30 @@ class SubjectController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validate = $request->validate([
+            'name' => 'required',
+            'surname' => 'required',
+        ], $messages=[
+            'name.required' => 'Inserire un Nome',
+            'surname.required' => 'Inserire un Cognome'
+        ]);
+
+        $subject = Subject::find($id);
+
+        $subject->name = $request->name;
+        $subject->surname = $request->surname;
+        $subject->nickname = $request->nickname;
+        $subject->birthdate = $request->birthdate;
+        $subject->placebirth = $request->placebirth;
+        $subject->cuicode = $request->cuicode;
+        $subject->fiscalcode = $request->fiscalcode;
+        $subject->updatedfrom = Auth::User()->name;
+
+        $subject->save();
+
+        return redirect()->route('subject.show',['id'=>$subject->id,'tab'=>1])->with('alerttype','success')->with('alertmessage','Soggetto modificato con successo');
+
+
     }
 
     /**
@@ -123,14 +149,14 @@ class SubjectController extends Controller
 
         $subject = Subject::find($id);
         $subject->groups()->attach($group_id);
-        return redirect()->route('subject.show',$subject->id);
+        return redirect()->route('subject.show',['id'=>$subject->id,'tab'=>1]);
 
     }
 
     public function detachGroup($id,$group_id){
         $subject = Subject::find($id);
         $subject->groups()->detach($group_id);
-        return redirect()->route('subject.show',$subject->id);
+        return redirect()->route('subject.show',['id'=>$subject->id,'tab'=>1]);
     }
 
 }

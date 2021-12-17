@@ -66,6 +66,8 @@ Route::post('user/updatepassword/{id}',[UserController::class,'updatepassword'])
 
 //Group managment -----------------------------------------------------------------------------------------------------------------
 Route::resource('group', GroupController::class)->middleware('auth');
+Route::get('listgroup',[GroupController::class,'listGroup'])->name('group.listgroup');
+Route::get('groupsubject',[GroupController::class,'viewSubjectGroup'])->name('group.viewsubject');
 
 
 // Subject -----------------------------------------------------------------------------------------------------------------
@@ -74,6 +76,8 @@ Route::group(['middleware'=>'auth'],function () {
     Route::get('subject/create',[SubjectController::class,'create'])->name('subject.create');
     Route::post('subject/store',[SubjectController::class,'store'])->name('subject.store');
     Route::get('subject/{id}/{tab}',[SubjectController::class,'show'])->name('subject.show');
+    Route::get('subjectedit/{id}',[SubjectController::class,'edit'])->name('subject.edit');
+    Route::put('subjectupdate/{id}',[SubjectController::class,'update'])->name('subject.update');
 
     Route::get('subject/attachgroup/{id}/{group_id}',[SubjectController::class,'attachGroup'])->name('subject.attachgroup');
     Route::get('subject/detachgroup/{id}/{group_id}',[SubjectController::class,'detachGroup'])->name('subject.detachgroup');

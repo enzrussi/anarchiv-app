@@ -6,6 +6,7 @@ use App\Models\Group;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
 use Nette\Utils\Random;
+use Illuminate\Support\Facades\DB;
 
 class GroupController extends Controller
 {
@@ -102,7 +103,26 @@ class GroupController extends Controller
         //
         $group->delete();
 
+        DB::table('group_subject')->where('group_id',$group->id)->delete();
+
+
+
         return redirect()->route('group.index')->with('alerttype','warning')->with('alertmessage','Gruppo eliminato con successo');
+
+    }
+
+    public function listGroup(){
+
+        $groups = Group::all()->sortBy('groupname');
+
+        return view('group.listGroup',['groups'=>$groups]);
+
+    }
+
+    public function viewSubjectGroup($id){
+
+
+
 
     }
 

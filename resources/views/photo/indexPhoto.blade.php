@@ -12,13 +12,13 @@
 
 
     <div class="row mb-3 mt-3">
-        <div class="col-8 border-bottom bg-primary text-white">
-            <a href="{{route('subject.show',['id'=>$subject->id,'tab'=>1])}}" class="text-white">
+        <div class="col-8 border-bottom">
+            <a href="{{route('subject.show',['id'=>$subject->id,'tab'=>1])}}">
             <div class="avatar size-xl"><img src="{{asset('photo').'/'.$subject->photo}}" alt="??"></div>
             <span class="text-uppercase font-weight-bold">{{ $subject->surname }} </span>
             <span class="text-capitalize font-weight-bold">{{ $subject->name }} </span>
             <span> nato a </span><span class="text-capitalize">{{ $subject->placebirth }} </span>
-            <span> in data </span><span>{{ $subject->birthdate }}</span>
+            <span> in data </span><span>{{date('d-m-Y',strtotime($subject->birthdate)) }}</span>
             </a>
         </div>
         <div class="col-4 text-right"><a class="btn btn-primary btn-sm text-white" data-toggle="modal" data-target="#formUploadPhotoModal">Inserisci Nuova</a>

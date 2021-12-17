@@ -57,13 +57,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                {{-- <a class="nav-link" id="tab6b-tab" data-toggle="tab" href="#tab6b" role="tab" aria-controls="tab6b"
-                    aria-selected="false" aria-disabled="true" tabindex="-1">
-                    <svg class="icon icon-primary">
-                        <use xlink:href="{{ asset('svg/sprite.svg') }}#it-link"></use>
-                    </svg> Foto
-                </a> --}}
-                <a class="nav-link" id="tab6b-tab" href="{{route('photo.index',$subject->id)}}"
+                <a class="nav-link" id="tab6b-tab" href="{{route('photo.index',['id'=>$subject->id])}}"
                     aria-selected="false" aria-disabled="true" tabindex="-1">
                     <svg class="icon icon-primary">
                         <use xlink:href="{{ asset('svg/sprite.svg') }}#it-link"></use>
@@ -98,7 +92,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Data di Nascita:</td>
-                                                <td>{{ $subject->birthdate }}</td>
+                                                <td>{{date('d-m-Y',strtotime(date('d-m-Y',strtotime($subject->birthdate))))}}</td>
                                                 <td>Luogo di nascita:</td>
                                                 <td>{{ $subject->placebirth }}</td>
                                             </tr>
@@ -119,10 +113,11 @@
                                                 <td>{{ $subject->updatedfrom }}</td>
                                             </tr>
                                             <tr>
-                                                <td colspan="4"><button><svg class="icon">
-                                                            <use xlink:href="{{ asset('svg/sprite.svg') }}#it-pencil">
-                                                            </use>
-                                                        </svg></button></td>
+                                                <td colspan="4">
+                                                    <a class="btn btn-sm" href="{{route('subject.edit',['id' => $subject->id])}}">
+                                                        <svg class="icon"><use xlink:href="{{ asset('svg/sprite.svg') }}#it-pencil"></use></svg>
+                                                    </a>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -197,7 +192,7 @@
                         <span class="text-uppercase font-weight-bold">{{ $subject->surname }} </span>
                         <span class="text-capitalize font-weight-bold">{{ $subject->name }} </span>
                         <span> nato a </span><span class="text-capitalize">{{ $subject->placebirth }} </span>
-                        <span> in data </span><span>{{ $subject->birthdate }}</span>
+                        <span> in data </span><span>{{ date('d-m-Y',strtotime($subject->birthdate)) }}</span>
                     </div>
                     <div class="col-4 text-right"><a class="btn btn-primary btn-sm"
                             href="{{ route('contact.create', $subject->id) }}">Inserisci Nuovo Contatto</a></div>
@@ -269,7 +264,7 @@
                         <span class="text-uppercase font-weight-bold">{{ $subject->surname }} </span>
                         <span class="text-capitalize font-weight-bold">{{ $subject->name }} </span>
                         <span> nato a </span><span class="text-capitalize">{{ $subject->placebirth }} </span>
-                        <span> in data </span><span>{{ $subject->birthdate }}</span>
+                        <span> in data </span><span>{{ date('d-m-Y',strtotime($subject->birthdate)) }}</span>
                     </div>
                     <div class="col-4 text-right"><a class="btn btn-primary btn-sm"
                             href="{{ route('vehicle.create', $subject->id) }}">Inserisci Nuovo Veicolo</a></div>
@@ -344,7 +339,7 @@
                         <span class="text-uppercase font-weight-bold">{{ $subject->surname }} </span>
                         <span class="text-capitalize font-weight-bold">{{ $subject->name }} </span>
                         <span> nato a </span><span class="text-capitalize">{{ $subject->placebirth }} </span>
-                        <span> in data </span><span>{{ $subject->birthdate }}</span>
+                        <span> in data </span><span>{{ date('d-m-Y',strtotime($subject->birthdate)) }}</span>
                     </div>
                     <div class="col-4 text-right"><a class="btn btn-primary btn-sm"
                             href="{{ route('place.create', $subject->id) }}">Inserisci Nuovo Luogo</a>
@@ -420,7 +415,7 @@
                         <span class="text-uppercase font-weight-bold">{{ $subject->surname }} </span>
                         <span class="text-capitalize font-weight-bold">{{ $subject->name }} </span>
                         <span> nato a </span><span class="text-capitalize">{{ $subject->placebirth }} </span>
-                        <span> in data </span><span>{{ $subject->birthdate }}</span>
+                        <span> in data </span><span>{{ date('d-m-Y',strtotime($subject->birthdate)) }}</span>
 
                     </div>
                     <div class="col-4 text-right"><a class="btn btn-primary btn-sm"

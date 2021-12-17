@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Group extends Model
 {
     use HasFactory;
+
+    public function subjects(){
+
+        return $this->belongsToMany('App\Models\Subject');
+    }
+
+
 }

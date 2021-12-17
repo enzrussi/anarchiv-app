@@ -11,13 +11,13 @@
     @endif
 
     <div class="row mb-3 mt-3">
-        <div class="col-8 border-bottom bg-primary text-white">
-            <a href="{{route('subject.show',['id'=>$photo->subject->id,'tab'=>1])}}" class="text-white" title="Torna alla scheda del soggetto">
+        <div class="col-8 border-bottom ">
+            <a href="{{route('subject.show',['id'=>$photo->subject->id,'tab'=>1])}}" title="Torna alla scheda del soggetto">
             <div class="avatar size-xl"><img src="{{asset('photo').'/'.$photo->subject->photo}}" alt="??"></div>
             <span class="text-uppercase font-weight-bold">{{ $photo->subject->surname }} </span>
             <span class="text-capitalize font-weight-bold">{{ $photo->subject->name }} </span>
             <span> nato a </span><span class="text-capitalize">{{ $photo->subject->placebirth }} </span>
-            <span> in data </span><span>{{ $photo->subject->birthdate }}</span>
+            <span> in data </span><span>{{ date('d-m-Y',strtotime($photo->subject->birthdate)) }}</span>
             </a>
         </div>
         <div class="col-4 text-right">

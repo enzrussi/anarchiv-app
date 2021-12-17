@@ -32,7 +32,7 @@
         <tr>
             <td><p class="font-weight-bold text-uppercase">{{$s->surname}}</p></td>
             <td><p class="text-capitalize">{{$s->name}}</p></td>
-            <td>{{$s->birthdate}}</td>
+            <td>{{date('d-m-Y',strtotime($s->birthdate))}}</td>
             <td><p class="text-capitalize">{{$s->placebirth}}</p></td>
             <td><a href="{{route('subject.show',['id'=>$s->id,'tab'=>1])}}">
                 <svg class="icon"><use xlink:href="{{asset('svg/sprite.svg')}}#it-external-link"></use></svg>
