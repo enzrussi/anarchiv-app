@@ -42,4 +42,8 @@ class Subject extends Model
         return $this->hasMany('App\Models\Note');
     }
 
+    public function events(){
+        return $this->belongsToMany('App\Models\Event');
+    }
+
 }

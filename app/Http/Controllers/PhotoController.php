@@ -53,7 +53,8 @@ class PhotoController extends Controller
             'mimes' => 'Il file immagine deve essere .jpg'
         ]);
 
-        $photodir = $_SERVER['DOCUMENT_ROOT'].'\\photo\\';
+        // $photodir = $_SERVER['DOCUMENT_ROOT'].'\\photo\\';
+        $photodir = 'C:\\xampp\htdocs\\anarchiv-app\\public\\photo\\';
 
         $date = new DateTime();
 
@@ -141,7 +142,8 @@ class PhotoController extends Controller
         //
         $photo = Photo::find($id);
 
-        $photodir = $_SERVER['DOCUMENT_ROOT'].'\\photo\\';
+        // $photodir = $_SERVER['DOCUMENT_ROOT'].'\\photo\\';
+        $photodir = 'C:\\xampp\htdocs\\anarchiv-app\\public\\photo\\';
         unlink($photodir.$photo->url);
         $photo->delete();
 

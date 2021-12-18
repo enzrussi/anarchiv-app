@@ -117,6 +117,37 @@
                                                     <a class="btn btn-sm" href="{{route('subject.edit',['id' => $subject->id])}}">
                                                         <svg class="icon"><use xlink:href="{{ asset('svg/sprite.svg') }}#it-pencil"></use></svg>
                                                     </a>
+                                                    @can('edit_settings')
+                                                    <button type="button" class="btn" data-toggle="modal" data-target="#confirmDeleteSubjectModal">
+                                                        <svg class="icon"><use xlink:href="{{ asset('svg/sprite.svg') }}#it-delete"></use></svg>
+                                                    </button>
+                                                    {{-- Confirm delete contact Modal --}}
+                                                            <div class="it-example-modal">
+                                                                <div class="modal" tabindex="-1" role="dialog"
+                                                                    id="confirmDeleteSubjectModal">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title">Conferma Eliminazione Soggetto
+                                                                                </h5>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <p>Sei sicuro di voler eliminare il soggetto?.</p>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button class="btn btn-outline-primary btn-sm" type="button"
+                                                                                    data-dismiss="modal">Annulla</button>
+                                                                                <form action="{{ route('subject.destroy', $subject->id) }}" method="post">
+                                                                                    @csrf
+                                                                                    @method('DELETE')
+                                                                                    <button type="submit" class="btn  btn-primary btn-sm">OK</button>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                    @endcan
                                                 </td>
                                             </tr>
                                             <tr>

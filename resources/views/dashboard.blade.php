@@ -15,11 +15,12 @@
               </svg>
               <span class="text">Soggetti</span>
             </div>
-            <div class="mb-2">
+            <div class="mb-5">
             <p><h5 class="card-title">Database di soggetti attenzionati dall'attività</h5><p>
             </div>
-            <div class="form-row mt-2">
+
                 <form action="{{route('subject.indexsubject')}}" method="post">
+                    <div class="form-row mt-2">
                     @csrf
                     <div class="form-group">
                         <div class="bootstrap-select-wrapper">
@@ -28,16 +29,24 @@
                             <option value="surname">Cognome</option>
                             <option value="name">Nome</option>
                             <option value="cuicode">Codice CUi</option>
+                            <option value="nickname">Soprannome</option>
                         </select>
                     </div>
                     </div>
                     <div class="form-group">
                     <input class="form-control" type="text" name="criteria" id="textcriteria" placeholder="Inserire criterio da ricercare">
                     <label for="textcriteria">uguale a :</label>
-                            <button type="submit" class="btn btn-primary btn-sm mt-1">Ricerca</button>
-                            <a class="btn btn-primary btn-sm mt-1"href="{{route('subject.create')}}">Inserimento Nuovo</a>
-                    </form>
-                    </div>
+                            <button type="submit" class="btn btn-outline-primary btn-sm mt-1">
+                                <svg class="icon icon-sm">
+                                <use xlink:href="{{asset('svg/sprite.svg')}}#it-search"></use>
+                                </svg>Ricerca</button>
+                            <a class="btn btn-primary btn-sm mt-1"href="{{route('subject.create')}}">
+                                <svg class="icon icon-sm icon-white">
+                                <use xlink:href="{{asset('svg/sprite.svg')}}#it-plus-circle"></use>
+                                </svg>  Inserimento Nuovo</a>
+                        </div>
+                        </form>
+
                 </div>
           </div>
         </div>
@@ -56,12 +65,16 @@
               <svg class="icon">
                 <use xlink:href="{{asset('svg/sprite.svg')}}#it-user"></use>
               </svg>
-              <span class="text">Gruppi e Associazioni</span>
+              <span class="text">Gruppi e Affiliati - Eventi</span>
             </div>
-            <a href="#">
-              <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor…</h5>
+            <a href="{{route('group.listgroup')}}">
+              <h5 class="card-title">Gruppi ed Affiliati</h5>
             </a>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p class="card-text">Visualizza i Gruppi/Associazioni ed i suoi affiliati</p>
+            <a href="#">
+                <h5 class="card-title">Eventi e Partecipanti</h5>
+              </a>
+              <p class="card-text">Visualizza gli Eventi e Partecipanti</p>
           </div>
         </div>
       </div>

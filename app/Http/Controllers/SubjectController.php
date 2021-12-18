@@ -11,6 +11,7 @@ use App\Models\Photo;
 use App\Models\Place;
 use App\Models\Vehicle;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SubjectController extends Controller
 {
@@ -58,7 +59,7 @@ class SubjectController extends Controller
             'updatedfrom' => Auth::user()->name
         ]);
 
-        return redirect()->route('subject.show',$subject->id);
+        return redirect()->route('subject.show',['id'=>$subject->id,'tab'=>1]);
 
 
     }
@@ -136,11 +137,39 @@ class SubjectController extends Controller
     public function destroy($id)
     {
         //
+        $subject = Subject::find($id);
+
+        //elimino i gruppi
+        DB::table('group_subject')->where('subject_id',$id)->delete();
+        //elimino i contatti
+        DB::table('contacts')->where('subject_id',$id)->delete();
+        //elimino i veicoli
+        DB::table('vehicles')->where('subject_id',$id)->delete();
+        //elimino i luogi
+        DB::table('places')->where('subject_id',$id)->delete();
+        //elimino le note
+        DB::table('notes')->where('subject_id',$id)->delete();
+        //elimino le foto
+        // $photodir = $_SERVER['DOCUMENT_ROOT'].'\\photo\\';
+        $photodir = 'C:\\xampp\htdocs\\anarchiv-app\\public\\photo\\';
+
+        foreach($subject->photos as $photo){
+
+            unlink($photodir.$photo->url);
+            $photo->delete();
+        }
+        DB::table('photos')->where('subject_id',$id)->delete();
+
+        //elimino gli eventi
+
+        $subject->delete();
+
+       return redirect()->route('dashboard')->with('alerttype','success')->with('alertmessage','Soggetto e su dipendenze eliminate con successo');
     }
 
     public function indexSubject(Request $request){
 
-        $subject = Subject::where($request->field,'like', $request->criteria)->get();
+        $subject = Subject::where($request->field,'like', $request->criteria)->orderBy('surname')->orderBy('name')->get();
         return view('subject.indexSubject',['subject' => $subject]);
 
     }

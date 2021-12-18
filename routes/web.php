@@ -78,6 +78,7 @@ Route::group(['middleware'=>'auth'],function () {
     Route::get('subject/{id}/{tab}',[SubjectController::class,'show'])->name('subject.show');
     Route::get('subjectedit/{id}',[SubjectController::class,'edit'])->name('subject.edit');
     Route::put('subjectupdate/{id}',[SubjectController::class,'update'])->name('subject.update');
+    Route::delete('subject/destroy/{id}',[SubjectController::class,'destroy'])->name('subject.destroy');
 
     Route::get('subject/attachgroup/{id}/{group_id}',[SubjectController::class,'attachGroup'])->name('subject.attachgroup');
     Route::get('subject/detachgroup/{id}/{group_id}',[SubjectController::class,'detachGroup'])->name('subject.detachgroup');
