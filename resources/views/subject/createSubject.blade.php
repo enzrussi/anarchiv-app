@@ -37,8 +37,10 @@
           <div class="it-datepicker-wrapper">
           <div class="form-row">
             <div class="form-group col-md-12">
-            <input type="date" class="form-control it-date-datepicker" name="birthdate" id="birthdate" placeholder="inserisci la data in formato gg/mm/aaaa">
+            <div class="it-datepicker-wrapper">
+            <input type="text" class="form-control it-date-datepicker" name="birthdate" id="birthdate" placeholder="inserisci la data in formato gg/mm/aaaa">
             <label for="birthdate">Data di nascita</label>
+            </div>
             </div>
           </div>
           </div>

@@ -71,7 +71,7 @@
               <h5 class="card-title">Gruppi ed Affiliati</h5>
             </a>
             <p class="card-text">Visualizza i Gruppi/Associazioni ed i suoi affiliati</p>
-            <a href="#">
+            <a href="{{route('event.index')}}">
                 <h5 class="card-title">Eventi e Partecipanti</h5>
               </a>
               <p class="card-text">Visualizza gli Eventi e Partecipanti</p>

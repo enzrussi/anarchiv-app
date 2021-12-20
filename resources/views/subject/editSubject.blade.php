@@ -35,7 +35,7 @@
     <div class="form-row col-12 mt-5 ">
         <div class="it-datepicker-wrapper col-4">
         <div class="form-group">
-            <input type="date" class="form-control it-date-datepicker" name="birthdate" id="birthdate"
+            <input type="text" class="form-control it-date-datepicker" name="birthdate" id="birthdate"
             value="{{$subject->birthdate}}" placeholder="inserisci la data in formato gg/mm/aaaa">
             <label for="birthdate">Data di Nascita</label>
         </div>

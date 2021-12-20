@@ -9,6 +9,7 @@ use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\EventController;
 use App\Models\Subject;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -93,7 +94,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('contact/store',[ContactController::class,"store"])->name('contact.store');
     Route::put('contact/update/{id}',[ContactController::class,'update'])->name('contact.update');
     Route::delete('contact/delete/{id}',[ContactController::class,'destroy'])->name('contact.destroy');
-
 });
 
 // Vehicle --------------------------------------------------------------------------------------------------------------
@@ -103,7 +103,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('vehicle/edit/{id}',[VehicleController::class,'edit'])->name('vehicle.edit');
     Route::put('vehicle/update/{id}',[VehicleController::class,'update'])->name('vehicle.update');
     Route::delete('vehicle/delete/{id}',[VehicleController::class,'destroy'])->name('vehicle.destroy');
-
 });
 
 // Place ----------------------------------------------------------------------------------------------------------------
@@ -114,7 +113,6 @@ Route::middleware(['auth'])->group(function(){
     Route::get('place/edit/{id}',[PlaceController::class,'edit'])->name('place.edit');
     Route::put('place/update/{id}',[PlaceController::class,'update'])->name('place.update');
     Route::delete('place/delete/{id}',[PlaceController::class,'destroy'])->name('place.destroy');
-
 });
 
 // Note -----------------------------------------------------------------------------------------------------------------
@@ -125,8 +123,6 @@ Route::middleware(['auth'])->group(function(){
     Route::get('note/edit/{id}',[NoteController::class,'edit'])->name('note.edit');
     Route::put('note/update/{id}',[NoteController::class,'update'])->name('note.update');
     Route::delete('note/destroy/{id}}',[NoteController::class,'destroy'])->name('note.destroy');
-
-
 });
 
 
@@ -142,6 +138,10 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
+// Event ----------------------------------------------------------------------------------------------------------------
+Route::middleware(['auth'])->group(function () {
+    Route::resource('event',EventController::class);
+});
 
 
 

@@ -92,7 +92,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Data di Nascita:</td>
-                                                <td>{{date('d-m-Y',strtotime(date('d-m-Y',strtotime($subject->birthdate))))}}</td>
+                                                <td>{{$subject->birthdate}}</td>
                                                 <td>Luogo di nascita:</td>
                                                 <td>{{ $subject->placebirth }}</td>
                                             </tr>
