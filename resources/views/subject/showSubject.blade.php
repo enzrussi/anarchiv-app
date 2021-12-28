@@ -178,10 +178,8 @@
                                                     @foreach ($groups as $group)
                                                         @if (null == $subject->groups()->find($group->id))
                                                             <div class="chip chip-secondary chip-lg">
-                                                                <a
-                                                                    href="{{ route('subject.attachgroup', ['id' => $subject->id, 'group_id' => $group->id]) }}">
-                                                                    <span
-                                                                        class="chip-label">{{ $group->groupname }}</span></a>
+                                                                <a href="{{ route('subject.attachgroup', ['id' => $subject->id, 'group_id' => $group->id]) }}">
+                                                                    <span class="chip-label">{{ $group->groupname }}</span></a>
                                                             </div>
                                                         @endif
                                                     @endforeach

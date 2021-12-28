@@ -14,6 +14,6 @@ class Event extends Model
     }
 
     public function documents(){
-        return $this->hasMany('App\Model\Document');
+        return $this->hasMany('App\Models\Document');
     }
 }

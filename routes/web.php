@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\PlaceController;
@@ -28,8 +29,8 @@ use Illuminate\Http\Request;
 
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('dashboard');
+})->middleware('auth');
 
 
 // Authorization Route -------------------------------------------------------------------
@@ -141,7 +142,19 @@ Route::middleware(['auth'])->group(function () {
 // Event ----------------------------------------------------------------------------------------------------------------
 Route::middleware(['auth'])->group(function () {
     Route::resource('event',EventController::class);
+    Route::get('event/editeventsubject/{id}',[EventController::class,'editEventSubject'])->name('event.editeventsubject');
+    Route::get('event/{id}/attacheventsubject/{subject_id}',[EventController::class,'attachEventSubject'])->name('event.attacheventsubject');
+    Route::get('event/{id}/detacheventsubject/{subject_id}',[EventController::class,'detachEventSubject'])->name('event.detacheventsubject');
 });
+
+// Document ------------------------------------------------------------------------------------------------------------
+Route::middleware(['auth'])->group(function () {
+    Route::post('document',[DocumentController::class,'store'])->name('document.store');
+    Route::delete('document/destroy/{id}',[DocumentController::class,'destroy'])->name('document.destroy');
+    Route::put('document/update/{id}',[DocumentController::class,'update'])->name('document.update');
+
+});
+
 
 
 

@@ -11,6 +11,6 @@ class Document extends Model
 
     public function event(){
 
-        return $this->hasMany('App\Models\Event');
+        return $this->belongsTo('App\Models\Event');
     }
 }

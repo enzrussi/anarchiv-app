@@ -90,6 +90,8 @@ class EventController extends Controller
     public function edit($id)
     {
         //
+
+
     }
 
     /**
@@ -102,6 +104,24 @@ class EventController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validate = $request->validate([
+            'description' => 'required',
+            'dateevent'=> 'required',
+            'note' =>'max:255'
+        ]);
+
+
+        $event = Event::find($id);
+
+        $event->description = $request->description;
+        $event->dateevent = $request->dateevent;
+        $event->note = $request->note;
+        $event->updatedfrom = Auth::User()->name;
+
+        $event->save();
+
+        return redirect()->route('event.show' ,$id)->with('alerttype','success')->with('alertmessage','Evento Aggiornato con successo');
+
     }
 
     /**
@@ -118,7 +138,35 @@ class EventController extends Controller
         DB::table('documents')->where('event_id')->delete();
         $event->delete();
 
-
         return redirect()->route('event.index')->with('alerttype','warning')->with('alertmessage','Evento cancellato con successo');
+
     }
+
+    public function editEventSubject($id){
+
+        $event = Event::find($id);
+        $subjects = Subject::all()->sortBy(['surname','name']);
+
+        return view('event.editEventSubject',['event'=>$event, 'subjects'=>$subjects]);
+
+
+    }
+
+    public function attachEventSubject($id,$subject_id){
+        $event = Event::find($id);
+        $event->subjects()->attach($subject_id);
+
+        return redirect()->route('event.editeventsubject',['id'=>$id]);
+
+    }
+
+    public function detachEventSubject($id,$subject_id){
+        $event = Event::find($id);
+        $event->subjects()->detach($subject_id);
+
+        return redirect()->route('event.editeventsubject',['id'=>$id]);
+
+    }
+
+
 }
