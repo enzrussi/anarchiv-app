@@ -12,7 +12,7 @@
 
 <div class="row">
     <div class="col-12 border-bottom border-primary mt-5">
-    <h6>Modifica Partecipanti Evento - <a href="{{route('event.show',$event->id)}}">{{$event->description}} del {{$event->dateevent}}</a></h6>
+    <h6>Modifica Partecipanti Evento - <a href="{{route('event.show',$event->id)}}">{{$event->description}} del {{date('d/m/Y',strtotime($event->dateevent))}}</a></h6>
     </div>
 </div>
 

@@ -29,10 +29,8 @@
     </div>
     <div class="form-row">
         <div class="form-group col-xl-12">
-        <div class="it-datepicker-wrapper">
-            <input type="text" name="dateevent" id="dateevent" placeholder="inserisci una data in formato gg/mm/aaaa" class="form-control it-date-datepicker">
-            <label for="dateevent">Data Evento</label>
-        </div>
+            <input type="date" name="dateevent" id="dateevent" placeholder="inserisci una data in formato gg/mm/aaaa" class="form-control">
+            <p style="font-size:small;">Data Evento</p>
         </div>
     </div>
     <div class="form-row">

@@ -29,7 +29,7 @@
             @if($photo->url != $photo->subject->photo)
             <a class="btn btn-primary btn-sm text-white" href="{{route('photo.updatephotosubject',$photo->id)}}" title="Seleziona come Foto principale">
                 <svg class="bg-primary icon icon-white align-bottom">
-                    <use xlink:href="{{asset('svg/sprite.svg')}}#it-user"></use>
+                    <use xlink:href="{{asset('svg/sprite.svg')}}#it-star-outline"></use>
                 </svg>
             </a>
             @endif
@@ -105,7 +105,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <input type="text" name="note" id="note" value="{{$photo->note}}">
-                            <label for="note"></label>
+                            <label for="note">Note</label>
                         </div>
                     </div>
                 </div>

@@ -12,6 +12,7 @@ use App\Models\Place;
 use App\Models\Vehicle;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 
 class SubjectController extends Controller
 {
@@ -169,7 +170,18 @@ class SubjectController extends Controller
 
     public function indexSubject(Request $request){
 
-        $subject = Subject::where($request->field,'like', $request->criteria)->orderBy('surname')->orderBy('name')->get();
+        if($request->field == 'luogo'){
+
+            $places = Place::where('city','like',$request->criteria)->get();
+
+
+            return view('subject.indexSubjectPlace',['places'=>$places]);
+
+        }else{
+
+            $subject = Subject::where($request->field,'like', $request->criteria)->orderBy('surname')->orderBy('name')->get();
+        }
+
         return view('subject.indexSubject',['subject' => $subject]);
 
     }

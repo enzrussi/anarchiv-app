@@ -34,16 +34,12 @@
               <label for="formCognome">Cognome</label>
             </div>
           </div>
-          <div class="it-datepicker-wrapper">
           <div class="form-row">
             <div class="form-group col-md-12">
-            <div class="it-datepicker-wrapper">
-            <input type="text" class="form-control it-date-datepicker" name="birthdate" id="birthdate" placeholder="inserisci la data in formato gg/mm/aaaa">
-            <label for="birthdate">Data di nascita</label>
+            <input type="date" class="form-control" name="birthdate" id="birthdate" placeholder="inserisci la data in formato gg/mm/aaaa">
+            <p style="font-size:small">Data di nascita</p>
             </div>
             </div>
-          </div>
-          </div>
           <div class="form-row">
             <div class="form-group col-md-12">
             <input type="text" class="form-control" name="placebirth" id="placebirth">

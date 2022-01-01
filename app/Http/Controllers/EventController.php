@@ -168,5 +168,32 @@ class EventController extends Controller
 
     }
 
+    public function find(Request $request){
+
+
+
+        switch ($request->type){
+
+            case 'date':
+                $events = Event::whereDate('dateevent',"=",$request->datecriteria)->get();
+                break;
+
+            case 'betweendate':
+                $events = Event::whereBetween('dateevent',[$request->datefrom,$request->dateto])->get();
+                break;
+
+            case 'description':
+                $events = Event::where('description','like','%'.$request->description.'%')->get();
+                break;
+
+        }
+
+
+
+        return view('event.indexEvent',['events'=>$events]);
+
+
+    }
+
 
 }

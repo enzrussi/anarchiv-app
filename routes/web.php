@@ -145,6 +145,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('event/editeventsubject/{id}',[EventController::class,'editEventSubject'])->name('event.editeventsubject');
     Route::get('event/{id}/attacheventsubject/{subject_id}',[EventController::class,'attachEventSubject'])->name('event.attacheventsubject');
     Route::get('event/{id}/detacheventsubject/{subject_id}',[EventController::class,'detachEventSubject'])->name('event.detacheventsubject');
+    Route::post('event/find',[EventController::class,'find'])->name('event.find');
 });
 
 // Document ------------------------------------------------------------------------------------------------------------

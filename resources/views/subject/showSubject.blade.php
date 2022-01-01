@@ -57,6 +57,13 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="#tab7b" class="nav-link" id="tab7b-tab" data-toggle="tab" role="tab" aria-controls="tab7b" aria-disabled="true" tabindex="-1" aria-selected="false">
+                    <svg class="icon icon-primary">
+                        <use xlink:href="{{ asset('svg/sprite.svg') }}#it-link"></use>
+                    </svg> Eventi
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" id="tab6b-tab" href="{{route('photo.index',['id'=>$subject->id])}}"
                     aria-selected="false" aria-disabled="true" tabindex="-1">
                     <svg class="icon icon-primary">
@@ -64,10 +71,11 @@
                     </svg> Foto
                 </a>
             </li>
+
         </ul>
 
         <div class="tab-content" id="myTab3Content">
-            {{-------------------------------------------------------------------------- anagraphic -----------------------------------------------------------------------------}}
+            {{-------------------------------------------------------------------------- anagraphic ----------------------------------------------------------------------------}}
             <div class="tab-pane p-4 fade {{ $tab == 1 || $tab == null ? 'show active' : null }}" id="tab1b" role="tabpanel"
                 aria-labelledby="tab1c-tab">
                 <div class="row">
@@ -75,8 +83,10 @@
                         <!--start card-->
                         <div class="card-wrapper">
                             <div class="card">
-                                <div class="card-body">
+                                <div class="card-body col-12">
+                                    <div class="col-8">
                                     <h5 class="card-title bg-primary text-white pl-2">Dati Anagrafici</h5>
+                                </div>
                                     <p class="card-text text-sans-serif">
                                     <table class="table table-borderless">
                                         <tbody>
@@ -92,7 +102,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Data di Nascita:</td>
-                                                <td>{{$subject->birthdate}}</td>
+                                                <td>{{date('d/m/Y',strtotime($subject->birthdate))}}</td>
                                                 <td>Luogo di nascita:</td>
                                                 <td>{{ $subject->placebirth }}</td>
                                             </tr>
@@ -210,7 +220,7 @@
                     </div>
                 </div>
             </div>
-            {{-------------------------------------------------------------------------- Contact ---------------------------------------------------------------------------------}}
+            {{-------------------------------------------------------------------------- Contact -------------------------------------------------------------------------------}}
             <div class="tab-pane p-4 fade {{ $tab == 2 ? 'show active' : null }}" id="tab2b" role="tabpanel"
                 aria-labelledby="tab2b-tab">
 
@@ -283,7 +293,7 @@
                     </div>
                 @endforeach
             </div>
-            {{--------------------------------------------------------------------------- Veicles --------------------------------------------------------------------------------}}
+            {{--------------------------------------------------------------------------- Veicles ------------------------------------------------------------------------------}}
             <div class="tab-pane p-4 fade {{ $tab == 3 ? 'show active' : null }}" id="tab3b" role="tabpanel"
                 aria-labelledby="tab3b-tab">
                 {{-- header tab --}}
@@ -434,8 +444,55 @@
                 </div>
 
             </div>
+
+            {{----------------------------------------------------------------------------- Eventi -----------------------------------------------------------------------------}}
+            <div class="tab-pane p-4 fade" id="tab7b" role="tabpanel" aria-labelledby="tab7b-tab">
+
+                 {{-- header tab --}}
+                 <div class="row mb-3">
+                    <div class="col-8 border-bottom  ">
+                        <div class="avatar size-xl"><img src="{{asset('photo').'/'.$subject->photo}}" alt="??"></div>
+                        <span class="text-uppercase font-weight-bold">{{ $subject->surname }} </span>
+                        <span class="text-capitalize font-weight-bold">{{ $subject->name }} </span>
+                        <span> nato a </span><span class="text-capitalize">{{ $subject->placebirth }} </span>
+                        <span> in data </span><span>{{ date('d-m-Y',strtotime($subject->birthdate)) }}</span>
+
+                    </div>
+                    <div class="col-4 text-right">
+
+                    </div>
+                </div>
+
+                {{-- Place --}}
+
+                <div class="row">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Descrizione</th>
+                                <th>Note</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    @foreach ($subject->events->sortBy('dateevent') as $event )
+                        <tr>
+                            <td>{{date('d/m/Y',strtotime($event->dateevent))}}</td>
+                            <td>{{$event->description}}</td>
+                            <td><p>{{$event->note}}</p>
+                            <p style="font-size:small">Dato aggiornato il {{$event->updated_at}} da {{$event->updatedfrom}}</p>
+                            <p class="text-right"><a href="{{route('event.show',$event->id)}}">Vedi</a></p>
+                            </td>
+                        </tr>
+                    @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
              {{--------------------------------------------------------------------------- Note --------------------------------------------------------------------------------}}
-            <div class="tab-pane p-4 fade3 {{ $tab == 5 ? 'show active' : null}}" id="tab5b" role="tabpanel" aria-labelledby="tab5b-tab">
+             <div class="tab-pane p-4 fade {{ $tab == 5 ? 'show active' : null}}" id="tab5b" role="tabpanel" aria-labelledby="tab5b-tab">
 
                 {{-- header tab --}}
                 <div class="row mb-3">
@@ -506,8 +563,11 @@
 
 
 
-        </div>
 
+
+
+            </div>
+        </div>
 
 
     @endsection

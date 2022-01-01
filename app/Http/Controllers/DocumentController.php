@@ -20,7 +20,7 @@ public function store(Request $request){
     $doc = new Document();
 
     $doc->description = $request->description;
-    $doc->datedocument = date('d/m/Y',strtotime($request->datedocument));
+    $doc->datedocument =$request->datedocument;
     $doc->note = $request->note;
     $doc->updatedfrom = Auth::user()->name;
     $doc->event_id = $request->event_id;

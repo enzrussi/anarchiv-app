@@ -3,51 +3,25 @@
 
 @section('content')
 
-<div class="row">
+<div class="row mt-5">
     <div class="col-12 col-lg-6">
       <!--start card-->
       <div class="card-wrapper">
         <div class="card">
           <div class="card-body">
             <div class="categoryicon-top">
+                <button type="button" class="btn" data-toggle="modal" data-target="#searchSubjectModal">
               <svg class="icon">
                 <use xlink:href="{{asset('svg/sprite.svg')}}#it-user"></use>
               </svg>
-              <span class="text">Soggetti</span>
+              <span class="text text-primary border-bottom">Soggetti</span>
+            </button>
             </div>
             <div class="mb-5">
             <p><h5 class="card-title">Database di soggetti attenzionati dall'attività</h5><p>
+            <p class="Card-text">Clicca per accedere alle funzionalità</p>
             </div>
-
-                <form action="{{route('subject.indexsubject')}}" method="post">
-                    <div class="form-row mt-2">
-                    @csrf
-                    <div class="form-group">
-                        <div class="bootstrap-select-wrapper">
-                            <label>Trova per :</label>
-                        <select title="Scegli una opzione" name="field">
-                            <option value="surname">Cognome</option>
-                            <option value="name">Nome</option>
-                            <option value="cuicode">Codice CUi</option>
-                            <option value="nickname">Soprannome</option>
-                        </select>
-                    </div>
-                    </div>
-                    <div class="form-group">
-                    <input class="form-control" type="text" name="criteria" id="textcriteria" placeholder="Inserire criterio da ricercare">
-                    <label for="textcriteria">uguale a :</label>
-                            <button type="submit" class="btn btn-outline-primary btn-sm mt-1">
-                                <svg class="icon icon-sm">
-                                <use xlink:href="{{asset('svg/sprite.svg')}}#it-search"></use>
-                                </svg>Ricerca</button>
-                            <a class="btn btn-primary btn-sm mt-1"href="{{route('subject.create')}}">
-                                <svg class="icon icon-sm icon-white">
-                                <use xlink:href="{{asset('svg/sprite.svg')}}#it-plus-circle"></use>
-                                </svg>  Inserimento Nuovo</a>
-                        </div>
-                        </form>
-
-                </div>
+           </div>
           </div>
         </div>
       </div>
@@ -71,9 +45,13 @@
               <h5 class="card-title">Gruppi ed Affiliati</h5>
             </a>
             <p class="card-text">Visualizza i Gruppi/Associazioni ed i suoi affiliati</p>
-            <a href="{{route('event.index')}}">
+
+            <button type="button" class="btn" data-toggle="modal" data-target="#findEventsModal">
+                Eventi e Partecipanti
+            </button>
+            {{-- <a href="{{route('event.index')}}">
                 <h5 class="card-title">Eventi e Partecipanti</h5>
-              </a>
+              </a> --}}
               <p class="card-text">Visualizza gli Eventi e Partecipanti</p>
           </div>
         </div>
@@ -81,6 +59,165 @@
       <!--end card-->
     </div>
   </div>
+
+
+    <div class="modal fade" tabindex="1" role="dialog" id="searchSubjectModal">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ricerca Soggetto</h5>
+                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <svg class="icon"><use xlink:href="{{asset('svg/sprite.svg')}}#it-close"></use></svg>
+                    </button>
+                    </div>
+                <div class="modal-body">
+
+            {{-- form ricerca soggetti --}}
+                    <form action="{{route('subject.indexsubject')}}" method="post">
+                        <div class="form-row mt-2">
+                         @csrf
+                            <div class="form-group col-12">
+                                <div class="bootstrap-select-wrapper">
+                                        <label>Trova per :</label>
+                                         <select title="Scegli una opzione" name="field">
+                                                <option value="surname">Cognome</option>
+                                                <option value="name">Nome</option>
+                                                <option value="cuicode">Codice CUi</option>
+                                                <option value="nickname">Soprannome</option>
+                                                <option value="placebirth">Luogo di Nascita</option>
+                                                <option value="luogo">Luogo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="form-row mt-2">
+                             <div class="form-group col-12">
+                                    <input class="form-control" type="text" name="criteria" id="textcriteria" placeholder="Inserire criterio da ricercare">
+                                    <label for="textcriteria">uguale a :</label>
+                            </div>
+                            </div>
+                        <div class="form-row mt-2">
+                            <div class="form-group col-12">
+
+                                <button type="submit" class="btn btn-outline-primary btn-sm mt-1">
+                                    <svg class="icon icon-sm">
+                                    <use xlink:href="{{asset('svg/sprite.svg')}}#it-search"></use>
+                                    </svg>Ricerca
+                                </button>
+
+                                <a class="btn btn-primary btn-sm mt-1"href="{{route('subject.create')}}">
+                                    <svg class="icon icon-sm icon-white">
+                                    <use xlink:href="{{asset('svg/sprite.svg')}}#it-plus-circle"></use>
+                                    </svg>  Inserimento Nuovo
+                                </a>
+
+                            </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="findEventsModal">
+      <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content col-12">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        Ricerca Eventi
+                        </h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <svg class="icon">
+                            <use xlink:href="{{asset('svg/sprite.svg')}}#it-close"></use>
+                        </svg>
+                        </button>
+                    </div>
+                <div class="modal-body">
+
+
+                {{-- Form Date Events --}}
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <form action="{{route('event.find')}}" method="post">
+                                @csrf
+                                <input type="hidden" name="type" value="date">
+                                <div class="form-row">
+                                    <div class="form-group col-4">
+                                        <span>Ricerca per Data Evento</span>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <input type="date" name="datecriteria" id="datecriteria" style="font-size:small">
+                                    </div>
+                                    <div class="form-group col-4 text-right">
+                                        <button type="submit" class="btn btn-sm btn-outline-primary">Cerca</button>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+
+                {{-- form between date --}}
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <form action="{{route('event.find')}}" method="post">
+                            @csrf
+                            <input type="hidden" name="type" value="betweendate">
+                            <div class="form-row">
+                                <div class="form-group col-3">
+                                    <span>Ricerca Periodo</span>
+                                </div>
+                                <div class="form-group col-3">
+                                    <p>Data da</p>
+                                    <input type="date" name="datefrom" id="datefrom" style="font-size:small">
+                                </div>
+                                <div class="form-group col-3">
+                                    <p>Data a</p>
+                                    <input type="date" name="dateto" id="dateto" style="font-size:small">
+                                </div>
+                                <div class="form-group col-3 text-right">
+                                    <button type="submit" class="btn btn-sm btn-outline-primary">Cerca</button>
+                                </div>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+
+                {{-- form description --}}
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <form action="{{route('event.find')}}" method="post">
+                            @csrf
+                            <input type="hidden" name="type" value="description">
+                            <div class="form-row">
+                                <div class="from-group col-4">
+                                    <span>Ricerca Descrizione</span>
+                                </div>
+                                <div class="form-group col-4">
+                                    <input type="text" name="description" id="description">
+                                </div>
+                                <div class="col-4 text-right">
+                                    <button type="submit" class="btn btn-outline-primary btn-sm">Cerca</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                 {{-- Form All Events --}}
+                 <div class="row mb-5">
+                    <div class="col-12 text-right">
+                        <a href="{{route('event.index')}}" class="btn btn-sm btn-outline-primary">Vedi Tutti</a>
+                        </div>
+                    </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 @endsection

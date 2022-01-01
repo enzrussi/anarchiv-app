@@ -18,7 +18,7 @@
     @foreach ($groups as $group )
     <div class="collapse-header" id="heading{{$group->id}}">
         <button data-toggle="collapse" data-target="#collapse{{$group->id}}" aria-expanded="true" aria-controls="collapse{{$group->id}}">
-            {{$group->groupname}}
+            {{$group->groupname}} <span class="badge badge-light">{{$group->subjects->count()}}</span>
         </button>
       </div>
       <div id="collapse{{$group->id}}" class="collapse" role="tabpane{{$group->id}}" aria-labelledby="heading{{$group->id}}">

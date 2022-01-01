@@ -29,9 +29,9 @@
             <th></th>
         </tr></thead>
         <tbody>
-    @foreach ($events as $event )
+    @foreach ($events->sortBy('dateevent') as $event )
             <tr>
-                <td>{{$event->dateevent}}</td>
+                <td>{{date('d/m/Y',strtotime($event->dateevent))}}</td>
                 <td>{{$event->description}}</td>
                 <td><a href="{{route('event.show',$event->id)}}">
                     <svg class="icon"><use xlink:href="{{asset('svg/sprite.svg')}}#it-external-link"></use></svg>
