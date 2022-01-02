@@ -190,7 +190,9 @@ class EventController extends Controller
 
 
 
-        return view('event.indexEvent',['events'=>$events]);
+        return view('event.indexEvent',['events'=>$events])
+        ->with('alerttype','success')
+        ->with('alertmessage','Eventi trovati ...');
 
 
     }

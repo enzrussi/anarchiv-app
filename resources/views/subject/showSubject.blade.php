@@ -20,57 +20,57 @@
                 <a class="nav-link {{ $tab == 1 || $tab == null ? 'active' : null }}" id="tab1c-tab" data-toggle="tab" href="#tab1b"
                     role="tab" aria-controls="tab1b" aria-selected="{{ $tab == 1 || $tab == null ? 'true' : 'false' }}">
                     <svg class="icon icon-primary">
-                        <use xlink:href="{{ asset('svg/sprite.svg') }}#it-link"></use>
+                        <use xlink:href="{{ asset('svg/sprite.svg') }}#it-user"></use>
                     </svg> Dati Anagrafici
                 </a>
-            </li>
+                </li>
             <li class="nav-item">
                 <a class="nav-link {{ $tab == 2 ? 'active' : null }}" id="tab2b-tab" data-toggle="tab" href="#tab2b" role="tab"
                     aria-controls="tab2b" aria-selected="{{ $tab == 2 ? 'true' : 'false' }}">
                     <svg class="icon icon-primary">
-                        <use xlink:href="{{ asset('svg/sprite.svg') }}#it-link"></use>
+                        <use xlink:href="{{ asset('svg/sprite.svg') }}#it-mail"></use>
                     </svg> Contatti
                 </a>
-            </li>
+                </li>
             <li class="nav-item">
                 <a class="nav-link {{ $tab == 3 ? 'active' : null }}" id="tab3b-tab" data-toggle="tab" href="#tab3b" role="tab"
                     aria-controls="tab3b" aria-selected="{{ $tab == 3 ? 'true' : 'false' }}">
                     <svg class="icon icon-primary">
-                        <use xlink:href="{{ asset('svg/sprite.svg') }}#it-link"></use>
+                        <use xlink:href="{{ asset('svg/sprite.svg') }}#it-settings"></use>
                     </svg> Veicoli
                 </a>
-            </li>
+                </li>
             <li class="nav-item">
                 <a class="nav-link {{ $tab == 4 ? 'active' : null }}" id="tab4b-tab" data-toggle="tab" href="#tab4b" role="tab"
                     aria-controls="tab4b" aria-selected="{{ $tab == 4 ? 'true' : 'false' }}" aria-disabled="true" tabindex="-1">
                     <svg class="icon icon-primary">
-                        <use xlink:href="{{ asset('svg/sprite.svg') }}#it-link"></use>
+                        <use xlink:href="{{ asset('svg/sprite.svg') }}#it-map-marker-circle"></use>
                     </svg> Luoghi
                 </a>
-            </li>
+                </li>
             <li class="nav-item">
                 <a class="nav-link {{ $tab == 5 ? 'active' : null }}" id="tab5b-tab" data-toggle="tab" href="#tab5b" role="tab" aria-controls="tab5b"
                     aria-selected="{{ $tab == 5 ? 'true' : 'false' }}" aria-disabled="true" tabindex="-1">
                     <svg class="icon icon-primary">
-                        <use xlink:href="{{ asset('svg/sprite.svg') }}#it-link"></use>
+                        <use xlink:href="{{ asset('svg/sprite.svg') }}#it-note"></use>
                     </svg> Note
                 </a>
-            </li>
+                </li>
             <li class="nav-item">
                 <a href="#tab7b" class="nav-link" id="tab7b-tab" data-toggle="tab" role="tab" aria-controls="tab7b" aria-disabled="true" tabindex="-1" aria-selected="false">
                     <svg class="icon icon-primary">
-                        <use xlink:href="{{ asset('svg/sprite.svg') }}#it-link"></use>
+                        <use xlink:href="{{ asset('svg/sprite.svg') }}#it-calendar"></use>
                     </svg> Eventi
                 </a>
-            </li>
+                </li>
             <li class="nav-item">
                 <a class="nav-link" id="tab6b-tab" href="{{route('photo.index',['id'=>$subject->id])}}"
                     aria-selected="false" aria-disabled="true" tabindex="-1">
                     <svg class="icon icon-primary">
-                        <use xlink:href="{{ asset('svg/sprite.svg') }}#it-link"></use>
+                        <use xlink:href="{{ asset('svg/sprite.svg') }}#it-camera"></use>
                     </svg> Foto
                 </a>
-            </li>
+                </li>
 
         </ul>
 

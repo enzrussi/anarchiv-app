@@ -10,15 +10,16 @@
         <div class="card">
           <div class="card-body">
             <div class="categoryicon-top">
-                <button type="button" class="btn" data-toggle="modal" data-target="#searchSubjectModal">
               <svg class="icon">
                 <use xlink:href="{{asset('svg/sprite.svg')}}#it-user"></use>
               </svg>
               <span class="text text-primary border-bottom">Soggetti</span>
-            </button>
             </div>
             <div class="mb-5">
             <p><h5 class="card-title">Database di soggetti attenzionati dall'attività</h5><p>
+                <button type="button" data-toggle="modal" data-target="#searchSubjectModal" class="btn btn-outline-primary btn-sm w-100">
+                    Ricerca e Inserimento
+                </button>
             <p class="Card-text">Clicca per accedere alle funzionalità</p>
             </div>
            </div>
@@ -41,17 +42,11 @@
               </svg>
               <span class="text">Gruppi e Affiliati - Eventi</span>
             </div>
-            <a href="{{route('group.listgroup')}}">
-              <h5 class="card-title">Gruppi ed Affiliati</h5>
-            </a>
+            <a href="{{route('group.listgroup')}}" class="btn btn-outline-primary btn-sm w-100">Gruppi ed Affiliati</a>
             <p class="card-text">Visualizza i Gruppi/Associazioni ed i suoi affiliati</p>
-
-            <button type="button" class="btn" data-toggle="modal" data-target="#findEventsModal">
+            <button type="button"  class="btn btn-outline-primary btn-sm w-100" data-toggle="modal" data-target="#findEventsModal">
                 Eventi e Partecipanti
             </button>
-            {{-- <a href="{{route('event.index')}}">
-                <h5 class="card-title">Eventi e Partecipanti</h5>
-              </a> --}}
               <p class="card-text">Visualizza gli Eventi e Partecipanti</p>
           </div>
         </div>
