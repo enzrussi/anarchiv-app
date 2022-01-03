@@ -19,11 +19,9 @@ class CreateVehicleTable extends Migration
             $table->string('plate',50)->nullable();
             $table->string('model',150)->nullable();
             $table->string('color', 100)->nullable();
-            $table->string('relationship',100)->nullable();
             $table->timestamps();
-            $table->foreignId('subject_id')->constrained();
             $table->string('updatedfrom',150);
-            $table->string('note',255)->nullable();
+            $table->text('note')->nullable();
         });
     }
 

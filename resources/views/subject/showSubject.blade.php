@@ -311,21 +311,21 @@
 
                 {{-- content tab --}}
 
-                @foreach ($subject->veichless as $v)
+                @foreach ($subject->vehicles as $v)
 
                     <div class="row shadow p-3 mb-5 bg-white ">
                         <div class="col-8 ">
                             <p><span class="font-weight-bold">Targa:{{ $v->plate }} </span>
                                 <span>Modello:{{ $v->model }} </span>
-                                <span>Tipo di relazione: {{ $v->relationship }}</span>
+                                <span>Tipo di relazione: {{ $v->pivot->relationship }}</span>
                             </p>
                             <p>
                                 <span style="font-size: small;"> dato aggiornato il {{ $v->updated_at }} da
                                     {{ $v->updatedfrom }} </span>
                             </p>
-                            <p><span class="text-justify">Note: {{ $v->note }}</span></p>
+                            <p><span class="text-justify">Note: {{ $v->note}}</span></p>
                         </div>
-                        <div class="text-right col-4"><a class="btn btn-sm" href="{{ route('vehicle.edit', $v->id) }}">
+                        <div class="text-right col-4"><a class="btn btn-sm" href="{{ route('vehicle.show', $v->id) }}">
                                 <svg class="icon">
                                     <use xlink:href="{{ asset('svg/sprite.svg') }}#it-pencil"></use>
                                 </svg>

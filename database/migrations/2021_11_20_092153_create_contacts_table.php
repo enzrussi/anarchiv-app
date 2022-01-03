@@ -22,7 +22,7 @@ class CreateContactsTable extends Migration
             $table->foreignId('subject_id')->constrained();
             $table->timestamps();
             $table->string('updatedfrom',150);
-            $table->string('note',255)->nullable();
+            $table->text('note')->nullable();
 
         });
     }

@@ -17,7 +17,6 @@ class Subjectgroup extends Migration
         Schema::create('groups',function(Blueprint $table){
             $table->id();
             $table->string('groupname');
-            $table->string('groupcode',5)->unique();
             $table->timestamps();
 
         });
@@ -31,5 +30,6 @@ class Subjectgroup extends Migration
     public function down()
     {
         //
+        Schema::dropIfExists('groups');
     }
 }

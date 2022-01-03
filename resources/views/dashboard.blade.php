@@ -13,14 +13,18 @@
               <svg class="icon">
                 <use xlink:href="{{asset('svg/sprite.svg')}}#it-user"></use>
               </svg>
-              <span class="text text-primary border-bottom">Soggetti</span>
+              <span class="text text-primary border-bottom">Soggetti - Veicoli</span>
             </div>
             <div class="mb-5">
-            <p><h5 class="card-title">Database di soggetti attenzionati dall'attività</h5><p>
+                <p class="Card-text">Clicca per accedere alle funzionalità</p>
+                <p><h5 class="card-title">Database di soggetti attenzionati dall'attività</h5><p>
                 <button type="button" data-toggle="modal" data-target="#searchSubjectModal" class="btn btn-outline-primary btn-sm w-100">
                     Ricerca e Inserimento
                 </button>
-            <p class="Card-text">Clicca per accedere alle funzionalità</p>
+                <p><h5 class="card-title">Veicoli</h5></p>
+                <button type="button" class="btn btn-outline-primary btn-sm w-100"  data-toggle="modal" data-target="#findVehicleModal">
+                   Ricerca e Inserimento
+                </button>
             </div>
            </div>
           </div>
@@ -55,7 +59,7 @@
     </div>
   </div>
 
-
+    {{-- Modal Subjet --}}
     <div class="modal fade" tabindex="1" role="dialog" id="searchSubjectModal">
       <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -113,26 +117,24 @@
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
 
-
+    {{-- Modal Event --}}
     <div class="modal fade" tabindex="-1" role="dialog" id="findEventsModal">
       <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content col-12">
                 <div class="modal-header">
-                    <h5 class="modal-title">
-                        Ricerca Eventi
-                        </h5>
+                    <h5 class="modal-title">Ricerca Eventi</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <svg class="icon">
                             <use xlink:href="{{asset('svg/sprite.svg')}}#it-close"></use>
                         </svg>
-                        </button>
-                    </div>
+                    </button>
+                </div>
                 <div class="modal-body">
 
 
-                {{-- Form Date Events --}}
+                    {{-- Form Date Events --}}
                     <div class="row mt-5">
                         <div class="col-12">
                             <form action="{{route('event.find')}}" method="post">
@@ -151,68 +153,113 @@
                                 </div>
                                 </form>
                             </div>
-                        </div>
+                    </div>
 
-                {{-- form between date --}}
-                <div class="row mt-5">
-                    <div class="col-12">
-                        <form action="{{route('event.find')}}" method="post">
-                            @csrf
-                            <input type="hidden" name="type" value="betweendate">
-                            <div class="form-row">
-                                <div class="form-group col-3">
-                                    <span>Ricerca Periodo</span>
+                    {{-- form between date --}}
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <form action="{{route('event.find')}}" method="post">
+                                @csrf
+                                <input type="hidden" name="type" value="betweendate">
+                                <div class="form-row">
+                                    <div class="form-group col-3">
+                                        <span>Ricerca Periodo</span>
+                                    </div>
+                                    <div class="form-group col-3">
+                                        <p>Data da</p>
+                                        <input type="date" name="datefrom" id="datefrom" style="font-size:small">
+                                    </div>
+                                    <div class="form-group col-3">
+                                        <p>Data a</p>
+                                        <input type="date" name="dateto" id="dateto" style="font-size:small">
+                                    </div>
+                                    <div class="form-group col-3 text-right">
+                                        <button type="submit" class="btn btn-sm btn-outline-primary">Cerca</button>
+                                    </div>
                                 </div>
-                                <div class="form-group col-3">
-                                    <p>Data da</p>
-                                    <input type="date" name="datefrom" id="datefrom" style="font-size:small">
-                                </div>
-                                <div class="form-group col-3">
-                                    <p>Data a</p>
-                                    <input type="date" name="dateto" id="dateto" style="font-size:small">
-                                </div>
-                                <div class="form-group col-3 text-right">
-                                    <button type="submit" class="btn btn-sm btn-outline-primary">Cerca</button>
-                                </div>
+                            </form>
                             </div>
-                        </form>
+                    </div>
+
+                    {{-- form description --}}
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <form action="{{route('event.find')}}" method="post">
+                                @csrf
+                                <input type="hidden" name="type" value="description">
+                                <div class="form-row">
+                                    <div class="from-group col-4">
+                                        <span>Ricerca Descrizione</span>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <input type="text" name="description" id="description">
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <button type="submit" class="btn btn-outline-primary btn-sm">Cerca</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
 
-                {{-- form description --}}
-                <div class="row mt-5">
-                    <div class="col-12">
-                        <form action="{{route('event.find')}}" method="post">
-                            @csrf
-                            <input type="hidden" name="type" value="description">
-                            <div class="form-row">
-                                <div class="from-group col-4">
-                                    <span>Ricerca Descrizione</span>
-                                </div>
-                                <div class="form-group col-4">
-                                    <input type="text" name="description" id="description">
-                                </div>
-                                <div class="col-4 text-right">
-                                    <button type="submit" class="btn btn-outline-primary btn-sm">Cerca</button>
-                                </div>
+                    {{-- Form All Events --}}
+                    <div class="row mb-5">
+                        <div class="col-12 text-right">
+                            <a href="{{route('event.index')}}" class="btn btn-sm btn-outline-primary">Vedi Tutti</a>
                             </div>
-                        </form>
                     </div>
+
+
+
                 </div>
+            </div>
+         </div>
+    </div>
 
-                 {{-- Form All Events --}}
-                 <div class="row mb-5">
-                    <div class="col-12 text-right">
-                        <a href="{{route('event.index')}}" class="btn btn-sm btn-outline-primary">Vedi Tutti</a>
+    {{-- Modal Vehicle --}}
+    <div class="modal fade" tabindex="-1" role="dialog" id="findVehicleModal">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ricerca Veicoli</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <svg class="icon">
+                            <use xlink:href="{{asset('svg/sprite.svg')}}#it-close"></use>
+                        </svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('vehicle.index')}}" method="post">
+                        @csrf
+                        <div class="form-row">
+                                <div class="form-group col-12">
+                                    <div class="bootstrap-select-wrapper w-100">
+                                        <label>Campo da ricercare</label>
+                                        <select name="field" title="--- Seleziona un valore ---" class="form-control">
+                                            <option value="plate">Targa</option>
+                                            <option value="model">Modello</option>
+                                            <option value="color">Colore</option>
+                                        </select>
+                                    </div>
+                                </div>
                         </div>
-                    </div>
-
-
-
-                    </div>
+                        <div class="form-row">
+                            <div class="form-group w-100">
+                                <input type="text" name="criteria" id="criteria" class="form-control" placeholder="(% per carattere jolly)">
+                                <label for="criteria">testo da ricercare</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group  w-100 text-right">
+                                <button class="btn btn-outline-primary btn-sm" type="submit">Cerca</button>
+                                <a class="btn btn-primary btn-sm" type="button" href="{{route('vehicle.create')}}">Inserisci Nuovo Veicolo</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 
 
 @endsection

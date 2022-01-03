@@ -18,7 +18,7 @@ class CreatePhotosTable extends Migration
             $table->id();
             $table->string('description',100)->nullable();
             $table->string('url',100)->unique();
-            $table->string('note',255)->nullable();
+            $table->text('note')->nullable();
             $table->timestamps();
             $table->string('updatedfrom',150);
             $table->foreignId('subject_id')->constrained();

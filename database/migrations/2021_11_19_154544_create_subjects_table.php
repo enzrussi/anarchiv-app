@@ -36,9 +36,6 @@ class CreateSubjectsTable extends Migration
      */
     public function down()
     {
-        Schema::table('subjects', function (Blueprint $table) {
-            //
-
-        });
+        Schema::dropIfExists('subjects');
     }
 }

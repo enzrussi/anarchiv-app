@@ -14,25 +14,21 @@
         <h5>Inserimento Nuovo Veicolo</h5>
     </div>
     <div class="mt-5">
-        <form action="{{route('vehicle.store',$subject->id)}}" method="POST">
+        <form action="{{route('vehicle.store')}}" method="POST">
             @csrf
         <div class="form-row">
-        <div class="form-group col-3">
-            <input type="text" class="form-control" name="plate" id="plate">
-            <label for="plate">Targa</label>
-        </div>
-        <div class="form-group col-3">
-            <input type="text" class="form-control" name="model" id="model">
-            <label for="Model">Modello</label>
-        </div>
-        <div class="form-group col-3">
-            <input type="text" class="form-control" name="color" id="color">
-            <label for="color">Colore</label>
-        </div>
-        <div class="form-group col-3">
-            <input type="text" class="form-control" name="relationship" id="relationship" placeholder="Intestatario, utilizzatore ...">
-            <label for="relationship">Relazione</label>
-        </div>
+            <div class="form-group col-4">
+                <input type="text" class="form-control" name="plate" id="plate">
+                <label for="plate">Targa</label>
+            </div>
+            <div class="form-group col-4">
+                <input type="text" class="form-control" name="model" id="model">
+                <label for="Model">Modello</label>
+            </div>
+            <div class="form-group col-4">
+                <input type="text" class="form-control" name="color" id="color">
+                <label for="color">Colore</label>
+            </div>
         </div>
         <div class="form-row">
             <div class="form-group col-12">
@@ -43,7 +39,7 @@
         <div class="form-row">
             <div class="form-group col-12">
                 <button type="submit" class="btn btn-primary">Salva</button>
-                <a href="{{route("subject.show",['id'=>$subject->id,'tab'=>3])}}" class="btn btn-outline-primary">Annulla</a>
+                <a href="{{url()->previous()}}" class="btn btn-outline-primary">Annulla</a>
             </div>
         </div>
         </form>

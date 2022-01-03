@@ -16,7 +16,7 @@ class CreateGroupSubjetcRelationshipTable extends Migration
 
             //
             Schema::create('group_subject', function (Blueprint $table) {
-                $table->integer('subjetc_id');
+                $table->integer('subject_id');
                 $table->integer('group_id');
                 //
             });

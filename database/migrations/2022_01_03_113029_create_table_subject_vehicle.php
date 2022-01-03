@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDocumentsTable extends Migration
+class CreateTableSubjectVehicle extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateDocumentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('documents', function (Blueprint $table) {
+        Schema::create('subject_vehicle', function (Blueprint $table) {
             $table->id();
-            $table->string('description',150)->required();
-            $table->date('datedocument')->nullable();
-            $table->text('note');
-            $table->string('updatedfrom',150)->required();
-            $table->foreignId('event_id')->constrained();
+            $table->integer('subject_id');
+            $table->integer('vehicle_id');
+            $table->string('relationship',50);
+            $table->string('updatedfrom');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateDocumentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('documents');
+        Schema::dropIfExists('subject_vehicle');
     }
 }

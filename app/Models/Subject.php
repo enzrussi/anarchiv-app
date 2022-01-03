@@ -26,8 +26,8 @@ class Subject extends Model
         return $this->hasMany('App\Models\Place');
     }
 
-    public function veichless(){
-        return $this->hasMany('App\Models\Vehicle');
+    public function vehicles(){
+        return $this->belongsToMany('App\Models\Vehicle')->withPivot('updated_at','updatedfrom','relationship');
     }
 
     public function contacts(){

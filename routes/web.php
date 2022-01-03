@@ -99,11 +99,19 @@ Route::middleware(['auth'])->group(function () {
 
 // Vehicle --------------------------------------------------------------------------------------------------------------
 Route::middleware(['auth'])->group(function () {
-    Route::get('vehicle/create/{id}',[VehicleController::class,'create'])->name('vehicle.create');
-    Route::post('vehicle/store/{id}',[VehicleController::class,'store'])->name('vehicle.store');
+    Route::post('vehicle',[VehicleController::class,'index'])->name('vehicle.index');
+    Route::get('vehicle/create',[VehicleController::class,'create'])->name('vehicle.create');
+    Route::post('vehicle/store',[VehicleController::class,'store'])->name('vehicle.store');
+    Route::get('vehicle/{id}',[VehicleController::class,'show'])->name('vehicle.show');
+
+    Route::post('vehicle/{id}/findsubject',[VehicleController::class,'findSubject'])->name('vehicle.findsubject');
+    Route::post('vehicle/{id}/attachsubject',[VehicleController::class,'attachSubject'])->name('vehicle.attachsubject');
+
     Route::get('vehicle/edit/{id}',[VehicleController::class,'edit'])->name('vehicle.edit');
     Route::put('vehicle/update/{id}',[VehicleController::class,'update'])->name('vehicle.update');
     Route::delete('vehicle/delete/{id}',[VehicleController::class,'destroy'])->name('vehicle.destroy');
+
+
 });
 
 // Place ----------------------------------------------------------------------------------------------------------------
