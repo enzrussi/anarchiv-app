@@ -48,8 +48,7 @@ class EventController extends Controller
 
         $validate = $request->validate([
             'dateevent'=>'required',
-            'description'=>'required|max:150',
-            'note'=>'max:255',
+            'description'=>'required|max:150'
         ],$messages=[
             'datevent.required'=>'Inserire la data dell\'evento',
             'descritpio.required'=>'Inserire una descrizione'
@@ -106,8 +105,7 @@ class EventController extends Controller
         //
         $validate = $request->validate([
             'description' => 'required',
-            'dateevent'=> 'required',
-            'note' =>'max:255'
+            'dateevent'=> 'required'
         ]);
 
 
@@ -144,11 +142,11 @@ class EventController extends Controller
 
     public function editEventSubject($id){
 
+
         $event = Event::find($id);
         $subjects = Subject::all()->sortBy(['surname','name']);
 
         return view('event.editEventSubject',['event'=>$event, 'subjects'=>$subjects]);
-
 
     }
 
@@ -156,7 +154,7 @@ class EventController extends Controller
         $event = Event::find($id);
         $event->subjects()->attach($subject_id);
 
-        return redirect()->route('event.editeventsubject',['id'=>$id]);
+        return redirect()->route('event.show',$event->id);
 
     }
 
@@ -164,13 +162,11 @@ class EventController extends Controller
         $event = Event::find($id);
         $event->subjects()->detach($subject_id);
 
-        return redirect()->route('event.editeventsubject',['id'=>$id]);
+        return redirect()->route('event.show',$event->id);
 
     }
 
     public function find(Request $request){
-
-
 
         switch ($request->type){
 

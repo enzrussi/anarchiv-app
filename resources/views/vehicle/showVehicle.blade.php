@@ -56,17 +56,57 @@
     @foreach ($vehicle->subjects as $s )
         <div class="col-12 col-lg-4">
             <div class="card-wrapper card-space">
-                <div class="card card-bg">
+                <div class="card card-bg border-bottom-card">
+                <div class="flag-icon"></div>
+                <div class="etichetta">
+
+                </div>
                 <div class="card-body">
                     <h5 class="card-title">
-                        <span class="text-uppecase">{{$s->surname}} </span>
+                        <a class="simple-link" href="{{route('subject.show',['id'=>$s->id,'tab'=>1])}}">
+                        <span class="text-uppercase">{{$s->surname}} </span>
                         <span class="text-capitalize">{{$s->name}} </span>
                         <span>{{date('d-m-Y',strtotime($s->birthdate))}}</span>
+                        </a>
                     </h5>
                     <p class="card-text">{{$s->pivot->relationship}}</p>
                     <p class="card-text">Dato aggiornato il {{$s->pivot->updated_at}}</p>
                     <p class="card-text">da {{$s->pivot->updatedfrom}}</p>
-                    <a class="simple-link" href="{{route('subject.show',['id'=>$s->id,'tab'=>1])}}">vedi...</a>
+                    <p class="text-right">
+                        <!-- Button trigger modal -->
+                    <button type="button" class="btn" data-toggle="modal" data-target="#model{{$s->id}}">
+                        <svg class="icon">
+                            <use xlink:href="{{asset('svg/sprite.svg')}}#it-minus-circle"></use>
+                          </svg>
+                          <span>Elimina</span>
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="model{{$s->id}}" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Conferma Eliminazione Relazione Veicolo - Soggetto</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Confermi di eliminare la relazione tra questo Soggetto ed il veicolo?</p>
+                                    <p>Procedura IRREVERSIBILE!!!</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                                    <form action="{{route('vehicle.detachsubject',$vehicle->id)}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="subject_id" value="{{$s->id}}">
+                                    <input type="hidden" name="relationship" value="{{$s->pivot->relationship}}">
+                                    <button type="submit" class="btn btn-danger">Elimina</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </p>
                 </div>
                 </div>
             </div>

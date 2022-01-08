@@ -6,6 +6,7 @@ use App\Models\Subject;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class VehicleController extends Controller
 {
@@ -137,9 +138,7 @@ class VehicleController extends Controller
         $validate = $request->validate([
             'plate'=>'required|max:50',
             'model'=>'max:150',
-            'color'=>'max:100',
-            'relationship'=>'required|max:100',
-            'note' => 'max:255'
+            'color'=>'max:100'
         ]);
 
         $vehicle = Vehicle::find($id);
@@ -147,13 +146,12 @@ class VehicleController extends Controller
         $vehicle->plate = $request->plate;
         $vehicle->model = $request->model;
         $vehicle->color = $request->color;
-        $vehicle->relationship = $request->relationship;
         $vehicle->updatedfrom = Auth::user()->name;
         $vehicle->note = $request->note;
 
         $vehicle->save();
 
-        return redirect()->route('subject.show',['id'=>$vehicle->subject_id,'tab'=>3]);
+        return redirect()->route('vehicle.show',$id);
     }
 
     /**
@@ -164,11 +162,13 @@ class VehicleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //cancello il veicolo
         $vehicle = Vehicle::find($id);
         $vehicle->delete();
+        // cancello la relazione con il soggetto
+        DB::table('subject_vehicle')->where('vehicle_id',$id)->delete();
 
-        return redirect()->route('subject.show',['id'=>$vehicle->subject_id,'tab'=>3]);
+        return redirect()->route('dashboard')->with('alerttype','success')->with('alertmessage','Veicolo eliminato con successo');
 
     }
 
@@ -195,6 +195,18 @@ class VehicleController extends Controller
         ]);
 
         return redirect()->route('vehicle.show',$id);
+
+    }
+
+    public function detachSubject(Request $request, $id){
+
+        $vehicle = Vehicle::find($id);
+        DB::table('subject_vehicle')->where([['subject_id',$request->subject_id],['relationship',$request->relationship]])->delete();
+
+
+        return redirect()->back();
+
+
 
     }
 

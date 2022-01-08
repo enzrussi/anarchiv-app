@@ -67,7 +67,7 @@
 <div class="it-example-modal" id="testmodal1">
     <div class="modal" tabindex="-1" role="dialog" id="testmodal">
        <div class="modal-dialog" role="document">
-          <div class="modal-content">
+          <div class="modal-content modal-lg">
             <form action="{{route('group.store')}}" method="post">
              <div class="modal-header">
                 <h5 class="modal-title">Nuovo Gruppo</h5>
@@ -76,7 +76,7 @@
                 @csrf
                 <fieldset aria-label="Crea Nuovo Gruppo">
                     <div class="form-group">
-                        <input type="text" name="groupname" class="form-control">
+                        <input type="text" name="groupname" class="form-control" placeholder="Nome del Gruppo">
                         <label for="groupname">Nome Gruppo</label>
                       </div>
                 </fieldset>

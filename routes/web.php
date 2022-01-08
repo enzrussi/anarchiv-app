@@ -29,8 +29,8 @@ use Illuminate\Http\Request;
 
 
 Route::get('/', function () {
-    return view('dashboard');
-})->middleware('auth');
+    return redirect()->route('dashboard');
+});
 
 
 // Authorization Route -------------------------------------------------------------------
@@ -41,12 +41,6 @@ Route::get('login',function (){
 Route::get('logout',[AuthController::class,'logout'])->name('logout');
 Route::post('verifiyuser',[AuthController::class,'authenticate'])->name('verifyUser');
 
-//restricted area
-
-// Route::get('admindashboard', function(){
-//     return view('dashboard');
-// })->name('admindashboard')->middleware('auth:admin');
-
 Route::get('dashboard', function(){
     return view('dashboard');
 })->name('dashboard')->middleware('auth');
@@ -54,10 +48,6 @@ Route::get('dashboard', function(){
 Route::get('changepassword/{perid}', function(Request $request) {
     return view('auth.changepassword',['perid'=> $request->perid]);
 })->name('changepassword')->middleware('auth');
-
-// Route::get('adminchangepassword/{perid}', function(Request $request) {
-//     return view('auth.changepassword',['perid'=> $request->perid]);
-// })->name('adminchangepassword')->middleware('auth:admin');
 
 Route::post('updatepassword',[AuthController::class,'updatepassword'])->name('updatepassword');
 
@@ -103,13 +93,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('vehicle/create',[VehicleController::class,'create'])->name('vehicle.create');
     Route::post('vehicle/store',[VehicleController::class,'store'])->name('vehicle.store');
     Route::get('vehicle/{id}',[VehicleController::class,'show'])->name('vehicle.show');
-
-    Route::post('vehicle/{id}/findsubject',[VehicleController::class,'findSubject'])->name('vehicle.findsubject');
-    Route::post('vehicle/{id}/attachsubject',[VehicleController::class,'attachSubject'])->name('vehicle.attachsubject');
-
     Route::get('vehicle/edit/{id}',[VehicleController::class,'edit'])->name('vehicle.edit');
     Route::put('vehicle/update/{id}',[VehicleController::class,'update'])->name('vehicle.update');
     Route::delete('vehicle/delete/{id}',[VehicleController::class,'destroy'])->name('vehicle.destroy');
+
+    Route::post('vehicle/{id}/findsubject',[VehicleController::class,'findSubject'])->name('vehicle.findsubject');
+    Route::post('vehicle/{id}/attachsubject',[VehicleController::class,'attachSubject'])->name('vehicle.attachsubject');
+    Route::post('vehicle/{id}/detachsubject',[VehicleController::class,'detachSubject'])->name('vehicle.detachsubject');
 
 
 });

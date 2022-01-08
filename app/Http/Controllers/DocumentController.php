@@ -13,8 +13,7 @@ public function store(Request $request){
 
     $validate = $request->validate([
         'description' => 'required|max:150',
-        'datedocument' => 'date|required',
-        'note'=>'max:255'
+        'datedocument' => 'date|required'
     ]);
 
     $doc = new Document();
@@ -34,8 +33,7 @@ public function update(Request $request,$id){
 
     $validate = $request->validate([
         'description' => 'required|max:150',
-        'datedocument' => 'required',
-        'note'=>'max:255'
+        'datedocument' => 'required'
     ]);
 
     $doc = Document::find($id);

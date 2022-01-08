@@ -19,56 +19,56 @@
             <li class="nav-item">
                 <a class="nav-link {{ $tab == 1 || $tab == null ? 'active' : null }}" id="tab1c-tab" data-toggle="tab" href="#tab1b"
                     role="tab" aria-controls="tab1b" aria-selected="{{ $tab == 1 || $tab == null ? 'true' : 'false' }}">
-                    <svg class="icon icon-primary">
+                    <svg class="icon icon-primary icon-sm">
                         <use xlink:href="{{ asset('svg/sprite.svg') }}#it-user"></use>
-                    </svg> Dati Anagrafici
+                    </svg> Dati
                 </a>
                 </li>
             <li class="nav-item">
                 <a class="nav-link {{ $tab == 2 ? 'active' : null }}" id="tab2b-tab" data-toggle="tab" href="#tab2b" role="tab"
                     aria-controls="tab2b" aria-selected="{{ $tab == 2 ? 'true' : 'false' }}">
-                    <svg class="icon icon-primary">
+                    <svg class="icon icon-primary  icon-sm">
                         <use xlink:href="{{ asset('svg/sprite.svg') }}#it-mail"></use>
-                    </svg> Contatti
+                    </svg> Contatti  <span class="badge badge-light">{{$subject->contacts->count()}}</span>
                 </a>
                 </li>
             <li class="nav-item">
                 <a class="nav-link {{ $tab == 3 ? 'active' : null }}" id="tab3b-tab" data-toggle="tab" href="#tab3b" role="tab"
                     aria-controls="tab3b" aria-selected="{{ $tab == 3 ? 'true' : 'false' }}">
-                    <svg class="icon icon-primary">
+                    <svg class="icon icon-primary  icon-sm">
                         <use xlink:href="{{ asset('svg/sprite.svg') }}#it-settings"></use>
-                    </svg> Veicoli
+                    </svg> Veicoli <span class="badge badge-light">{{$subject->vehicles->count()}}</span>
                 </a>
                 </li>
             <li class="nav-item">
                 <a class="nav-link {{ $tab == 4 ? 'active' : null }}" id="tab4b-tab" data-toggle="tab" href="#tab4b" role="tab"
                     aria-controls="tab4b" aria-selected="{{ $tab == 4 ? 'true' : 'false' }}" aria-disabled="true" tabindex="-1">
-                    <svg class="icon icon-primary">
+                    <svg class="icon icon-primary  icon-sm">
                         <use xlink:href="{{ asset('svg/sprite.svg') }}#it-map-marker-circle"></use>
-                    </svg> Luoghi
+                    </svg> Luoghi <span class="badge badge-light">{{$subject->places->count()}}</span>
                 </a>
                 </li>
             <li class="nav-item">
                 <a class="nav-link {{ $tab == 5 ? 'active' : null }}" id="tab5b-tab" data-toggle="tab" href="#tab5b" role="tab" aria-controls="tab5b"
                     aria-selected="{{ $tab == 5 ? 'true' : 'false' }}" aria-disabled="true" tabindex="-1">
-                    <svg class="icon icon-primary">
+                    <svg class="icon icon-primary  icon-sm">
                         <use xlink:href="{{ asset('svg/sprite.svg') }}#it-note"></use>
-                    </svg> Note
+                    </svg> Note <span class="badge badge-light">{{$subject->notes->count()}}</span>
                 </a>
                 </li>
             <li class="nav-item">
                 <a href="#tab7b" class="nav-link" id="tab7b-tab" data-toggle="tab" role="tab" aria-controls="tab7b" aria-disabled="true" tabindex="-1" aria-selected="false">
-                    <svg class="icon icon-primary">
+                    <svg class="icon icon-primary  icon-sm">
                         <use xlink:href="{{ asset('svg/sprite.svg') }}#it-calendar"></use>
-                    </svg> Eventi
+                    </svg> Eventi <span class="badge badge-light">{{$subject->events->count()}}</span>
                 </a>
                 </li>
             <li class="nav-item">
                 <a class="nav-link" id="tab6b-tab" href="{{route('photo.index',['id'=>$subject->id])}}"
                     aria-selected="false" aria-disabled="true" tabindex="-1">
-                    <svg class="icon icon-primary">
+                    <svg class="icon icon-primary  icon-sm">
                         <use xlink:href="{{ asset('svg/sprite.svg') }}#it-camera"></use>
-                    </svg> Foto
+                    </svg> Foto <span class="badge badge-light">{{$subject->photos->count()}}</span>
                 </a>
                 </li>
 
@@ -305,8 +305,9 @@
                         <span> nato a </span><span class="text-capitalize">{{ $subject->placebirth }} </span>
                         <span> in data </span><span>{{ date('d-m-Y',strtotime($subject->birthdate)) }}</span>
                     </div>
-                    <div class="col-4 text-right"><a class="btn btn-primary btn-sm"
-                            href="{{ route('vehicle.create', $subject->id) }}">Inserisci Nuovo Veicolo</a></div>
+                    {{-- <div class="col-4 text-right"><a class="btn btn-primary btn-sm"
+                            href="{{ route('vehicle.create', $subject->id) }}">Inserisci Nuovo Veicolo</a>
+                    </div> --}}
                 </div>
 
                 {{-- content tab --}}
@@ -325,17 +326,18 @@
                             </p>
                             <p><span class="text-justify">Note: {{ $v->note}}</span></p>
                         </div>
-                        <div class="text-right col-4"><a class="btn btn-sm" href="{{ route('vehicle.show', $v->id) }}">
+                        <div class="text-right col-4">
+                            <a class="btn btn-sm" href="{{ route('vehicle.show', $v->id) }}">
                                 <svg class="icon">
-                                    <use xlink:href="{{ asset('svg/sprite.svg') }}#it-pencil"></use>
+                                    <use xlink:href="{{ asset('svg/sprite.svg') }}#it-more-actions"></use>
                                 </svg>
                             </a>
-                            <button type="button" class="btn" data-toggle="modal"
+                            {{-- <button type="button" class="btn" data-toggle="modal"
                                 data-target="#confirmDeleteVehicleModal{{ $v->id }}">
                                 <svg class="icon">
                                     <use xlink:href="{{ asset('svg/sprite.svg') }}#it-delete"></use>
                                 </svg>
-                            </button>
+                            </button> --}}
                         </div>
                     </div>
                     {{-- Confirm delete contact Modal --}}

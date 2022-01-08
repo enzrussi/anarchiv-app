@@ -43,8 +43,7 @@ class PlaceController extends Controller
             'address' => 'max:150',
             'city' => 'max:50',
             'zipcode'=>'max:15',
-            'relationship' => 'max:150',
-            'note' => 'max:255'
+            'relationship' => 'max:150'
         ]);
 
         $place = new Place();
@@ -111,8 +110,7 @@ class PlaceController extends Controller
             'address' => 'max:150',
             'city' => 'max:50',
             'zipcode'=>'max:15',
-            'relationship' => 'max:150',
-            'note' => 'max:255'
+            'relationship' => 'max:150'
         ]);
 
         $place->name = $request->name;

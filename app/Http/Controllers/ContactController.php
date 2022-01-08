@@ -43,8 +43,7 @@ class ContactController extends Controller
         //
         $validate = $request->validate([
             'contact' => 'required',
-            'relationship' => 'required',
-            'note' => 'max:150'
+            'relationship' => 'required'
         ]);
 
         $subject = Subject::find($request->subject_id);
@@ -98,8 +97,7 @@ class ContactController extends Controller
     {
         //
         $validate = $request->validate([
-            'contact'=>'required',
-            'note'=> 'max:255'
+            'contact'=>'required'
         ]);
 
         $contact = Contact::find($id);

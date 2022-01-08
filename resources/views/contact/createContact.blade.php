@@ -44,18 +44,24 @@
         </div>
         <div class="form-row">
             <div class="col-12 form-group">
-            <input class="form-control" type="text" name="relationship" id="relationship" placeholder="Inserire ad es. Utilizzatore,intestatario ...">
-            <label for="relationship">Tipo di Relazione con il Soggetto</label>
+                <div class="bootstrap-select-wrapper">
+                    <label>Tipo Relazione</label>
+                    <select class="form-control" name="relationship" id="relationship" title="Scegli un'opzione">
+                        <option value="INTESTATARIO">INTESTATARIO</option>
+                        <option value="UTILIZZATORE">UTILIZZATORE</option>
+                        <option value="ALTRO">ALTRO</option>
+                    </select>
+                </div>
             </div>
         </div>
-        <div class="form-row">
+        <div class="form-row mt-2">
             <div class="col-12 form-group">
                 <textarea name="note" id="note" cols="30" rows="4"></textarea>
                 <label for="note">Note</label>
             </div>
         </div>
-        <div class="form-row">
-            <div class="form-group col text-right">
+        <div class="form-row text-right">
+            <div class="form-group col-12 text-right">
                 <button type="submit" class="btn btn-primary btn-sm">Salva</button>
                 <a href="{{route('subject.show',['id'=>$subject->id,'tab'=>2])}}" class="btn btn-outline-primary btn-sm">Annulla</a>
             </div>

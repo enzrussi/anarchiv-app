@@ -181,7 +181,7 @@
                 </div>
                 <div class="col-2 border-bottom border-primary text-right">
                     <a class="btn btn-sm" href="{{route('event.editeventsubject',$event->id)}}">
-                        <svg class="icon"><use xlink:href="{{asset('svg/sprite.svg')}}#it-pencil"></use></svg>
+                        <svg class="icon"><use xlink:href="{{asset('svg/sprite.svg')}}#it-plus-circle"></use></svg>
                     </a>
                 </div>
             </div>
@@ -202,143 +202,9 @@
 
 
         </div>
-
-
-
     </div>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-{{-- <div class="row mt-3">
-    <div class="col-10 border-bottom border-primary text-danger">
-        <h5>Documentazione</h6>
-    </div>
-    <div class="col-2 border-bottom border-primary text-right">
-        <button class="btn btn-sm" data-toggle="modal" data-target="#createDocumentModal">
-            <svg class="icon"><use xlink:href="{{asset('svg/sprite.svg')}}#it-plus-circle"></use></svg>
-        </button>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-12">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Descrizione</th>
-                    <th>Data Documentazione</th>
-                    <th>Note</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($event->documents as $d )
-                <tr>
-                    <td>{{$d->description}}</td>
-                    <td>{{date('d/m/Y',strtotime($d->datedocument))}}</td>
-                    <td>
-                        <p>{{$d->note}}</p>
-                        <p style="font-size:small">Dato aggiornato il {{$d->updated_at}} da {{$d->updatedfrom}}</p>
-                    </td>
-                    <td class="text-right">
-                        <button typp="button" class="btn btn-sm" data-toggle="modal" data-target="#updateDocumentModal{{$d->id}}"><svg class="icon"><use xlink:href="{{asset('svg/sprite.svg')}}#it-pencil"></use></svg></button>
-                        <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#destroyDocumentModal{{$d->id}}">
-                            <svg class="icon"><use xlink:href="{{asset('svg/sprite.svg')}}#it-delete"></use></svg>
-                        </button>
-                    </td>
-                </tr>
-
-                <!-- Modal Update Document -->
-
-                <div class="modal" tabindex="-1" role="dialog" id="updateDocumentModal{{$d->id}}">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                MODIFICA RIFERIMENTO DOCUMENTALE
-                            </div>
-                            <div class="modal-body">
-                                <form action="{{route('document.update',$d->id)}}" method="post">
-                                    @csrf
-                                    @method('PUT')
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <p style="font-size:small" class="text-weight-bold">Descrizione</p>
-                                        <input type="text" name="description" id="description" class="form-control" value="{{$d->description}}">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <p style="font-size:small" class="text-weight-bold">Data Documento</p>
-                                        <p></p>
-                                        <input type="date" name="datedocument" id="datedocument" value="{{$d->datedocument}}">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <p style="font-size:small" class="text-weight-bold">Note</p>
-                                        <textarea cols="30" rows="5" name="note" id="note">{{$d->note}}</textarea>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-sm btn-primary">Salva</button>
-                                        <button type="button" class="btn btn-sm btn-outline-primary" data-dismiss="modal">Annulla</button>
-                                    </div>
-                                </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Modal Destroy Document -->
-
-                        <div class="modal" tabindex="-1" role="dialog" id="destroyDocumentModal{{$d->id}}">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        Conferma Eliminazione Documento
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="{{route('document.destroy',$d->id)}}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <div class="form-row">
-                                            <div class="form-group">
-                                            <p>Conferma la cancellazione del Riferimento Documentale?</p>
-                                            <p>(Procedura irreversibile...)</p>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-12">
-                                                <button type="submit" class="btn btn-primary btn-sm">Conferma</button>
-                                                <button type="button" class="btn btn-outline-primary btn-sm" data-dismiss="modal">Annulla</button>
-                                            </div>
-                                        </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                @endforeach
-            </tbody>
-        </table>
-
-    </div>
-</div> --}}
-
 
 
 
@@ -360,7 +226,7 @@
                 <form action="{{route('event.destroy',$event->id)}}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button class="btn btn-primary btn-sm" type="submit">Conferma</button>
+                <button class="btn btn-danger btn-sm" type="submit">Conferma</button>
                 </form>
              </div>
           </div>

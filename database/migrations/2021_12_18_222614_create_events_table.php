@@ -17,7 +17,7 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->string('description',150)->require();
             $table->date('dateevent')->require();
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->string('updatedfrom',150)->require();
             $table->timestamps();
         });

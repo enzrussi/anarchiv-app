@@ -16,23 +16,23 @@
     </div>
 </div>
 
-<div class="row mt-3">
-    <div class="col-5">
-        <p>Elenco Soggetti nel Database</p>
+<div class="row mt-3 ">
+    <div class="col-5 shadow p-3 mb-5 bg-white">
+        <p>Elenco Soggetti Trovati nel Database</p>
         <p class="border-bottom" style="font-size:small">(Clicca sul nome per aggiungerlo tra i partecipanti)</p>
 
     </div>
     <div class="col-2">
     </div>
-    <div class="col-5">
+    <div class="col-5 shadow p-3 mb-5 bg-white">
         <p>Elenco Partecipanti o Soggetti legati all'evento</p>
         <p class="border-bottom" style="font-size:small">(Clicca sul nominativo per eliminarlo dall'elenco)</p>
 
     </div>
 </div>
 
-<div class="row mt-3">
-    <div class="col-5" style="height:550px;overflow:auto">
+<div class="row mt-3 ">
+    <div class="col-5 shadow p-3 mb-5 bg-white" style="height:550px;overflow:auto">
         @foreach ($subjects as $s)
         @if(null==$event->subjects()->find($s->id))
         <p>
@@ -48,10 +48,10 @@
         @endif
         @endforeach
     </div>
-    <div class="col-2 text-center" style="height:500px;padding-top:200px">
+    <div class="col-2 text-center" style="height:550px;padding-top:200px">
         <svg class="icon icon-xl icon-primary"><use xlink:href="{{asset('svg/sprite.svg')}}#it-exchange-circle"></use></svg>
     </div>
-    <div class="col-5" style="height:500px;overflow:auto">
+    <div class="col-5 shadow p-3 mb-5 bg-white" style="height:550px;overflow:auto">
         @foreach ($event->subjects->sortBy(['surname','name']) as $es)
         <p>
                 <a href="{{route('event.detacheventsubject',[$event->id,$es->id])}}">

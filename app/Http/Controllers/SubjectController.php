@@ -145,7 +145,7 @@ class SubjectController extends Controller
         //elimino i contatti
         DB::table('contacts')->where('subject_id',$id)->delete();
         //elimino i veicoli
-        DB::table('vehicles')->where('subject_id',$id)->delete();
+        DB::table('subject_vehicle')->where('subject_id',$id)->delete();
         //elimino i luogi
         DB::table('places')->where('subject_id',$id)->delete();
         //elimino le note
@@ -173,9 +173,12 @@ class SubjectController extends Controller
         if($request->field == 'luogo'){
 
             $places = Place::where('city','like',$request->criteria)->get();
-
-
             return view('subject.indexSubjectPlace',['places'=>$places]);
+
+        }elseif ($request->field == 'contacts'){
+
+            $contacts = Contact::where('contact','like',$request->criteria)->get();
+            return view('subject.indexSubjectContact',['contacts'=>$contacts]);
 
         }else{
 

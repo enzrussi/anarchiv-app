@@ -42,7 +42,11 @@ class GroupController extends Controller
     {
         //
         $validate = $request->validate([
-            'groupname'=>'required|max:20',
+            'groupname'=>'required|max:20|unique:groups',
+        ],$messages=[
+            'groupname.required'=>'Nome gruppo richiesto',
+            'groupname.unique' => 'Nome gruppo già esistente',
+            'groupname.max' => 'Nome gruppo troppo lungo (max 20 caratteri)'
         ]);
 
         $group = new Group();
@@ -86,6 +90,14 @@ class GroupController extends Controller
     public function update(UpdateGroupRequest $request, Group $group)
     {
         //
+        $validate = $request->validate([
+            'groupname'=>'required|max:20|unique:groups',
+        ],$messages=[
+            'groupname.required'=>'Nome gruppo richiesto',
+            'groupname.unique' => 'Nome gruppo già esistente',
+            'groupname.max' => 'Nome gruppo troppo lungo (max 20 caratteri)'
+        ]);
+
         $group->groupname = $request->groupname;
         $group->save();
         return redirect()->route('group.index')->with('alerttype','success')->with('alertmessage','Gruppo modificato con successo');

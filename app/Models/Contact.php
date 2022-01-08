@@ -16,4 +16,8 @@ class Contact extends Model
         'note',
         'updatedfrom'
     ];
+
+    public function subject(){
+        return $this->belongsTo('App\Models\Subject');
+    }
 }

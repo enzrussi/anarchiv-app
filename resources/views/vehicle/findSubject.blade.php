@@ -17,10 +17,11 @@
 </div>
 <div class="row mt-3">
     <div class="col-4"><h6><span>Targa: </span><span>{{$vehicle->plate}}</span></h6></div>
-    <div class="col-4"><span>Modello: </span><span>{{$vehicle->Model}}</span></div>
+    <div class="col-4"><span>Modello: </span><span>{{$vehicle->model}}</span></div>
 </div>
 <div class="row">
     <div class="col-12">
+        @if (count($subjects)>0)
         <table class="table">
             <thead>
                 <tr>
@@ -57,18 +58,21 @@
                                         @csrf
                                        <input type="hidden" name="subject_id" value="{{$s->id}}">
                                         <div class="form-row">
-                                            <div class="form-group w-100">
-                                              <p>Tipo relazione</p>
-                                              <select name="relationship" id="relationship">
-                                                <option value="Intestatario">Intestatario</option>
-                                                <option value="Utilizzatore">Utilizzatore</option>
-                                                <option value="Noleggio">Noleggio</option>
-                                                <option value="altro">Altro</option>
-                                              </select>
+                                            {{-- <div class="form-group w-100"> --}}
+                                                <div class="boostrap-select-wrapper w-100">
+                                                <label for="relationship">Tipo di Relazione</label>
+                                                <select name="relationship" id="relationship" class="form-control">
+                                                    <option value=""></option>
+                                                    <option value="Intestatario">Intestatario</option>
+                                                    <option value="Utilizzatore">Utilizzatore</option>
+                                                    <option value="Noleggio">Noleggio</option>
+                                                    <option value="altro">Altro</option>
+                                                </select>
                                             </div>
+                                            {{-- </div> --}}
                                         </div>
-                                        <div class="form-row">
-                                            <div class="form-group w-100">
+                                        <div class="form-row mt-5">
+                                            <div class="form-group w-100 text-right">
                                               <button type="submit" class="btn btn-primary">Salva</button>
                                             </div>
                                         </div>
@@ -79,11 +83,27 @@
                         </div>
                     </td>
                 </tr>
-
                 @endforeach
             </tbody>
-
         </table>
+        @else
+        <div class="row justify-content-md-center">
+            <div class="callout">
+                <div class="callout-title"><svg class="icon"><use xlink:href="{{asset('svg/sprite.svg')}}#it-info-circle"></use></svg><span class="sr-only">Confermato</span> Soggetti non Trovati</div>
+                <p>Dalla ricerca che hai effettuato non risulta alcun soggetto presente.</p>
+                <p>Puoi ripetere la ricerca oppure inserire un nuovo soggetto</p>
+                <p></p>
+                <div class="row col-12 text-center">
+                    <div class="col-6">
+                        <a href="{{url()->previous()}}">Nuova Ricerca</a>
+                    </div>
+                    <div class="col-6">
+                        <a href="{{route('subject.create')}}">Inserisci Nuovo Soggetto</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
     </div>
 </div>
 

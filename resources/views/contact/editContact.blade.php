@@ -42,9 +42,18 @@
         </div>
         <div class="form-row">
             <div class="col-12 form-group">
-            <input class="form-control" type="text" name="relationship" id="relationship"
-            value="{{$contact->relationship}}">
-            <label for="relationship">Tipo di Relazione con il Soggetto</label>
+                <div class="bootstrap-select-wrapper">
+                    <label>Tipo Relazione</label>
+                    <select class="form-control" name="relationship" id="relationship" title="Scegli un'opzione">
+                        @foreach (array('INTESTATARIO','UTILIZZATORE','ALTRO') as $r)
+                            @if($r == $contact->relationship)
+                            <option value="{{$r}}" selected>{{$r}}</option>
+                            @else
+                            <option value="{{$r}}">{{$r}}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
             </div>
         </div>
         <div class="form-row">

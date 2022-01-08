@@ -85,14 +85,16 @@
                                                 <option value="nickname">Soprannome</option>
                                                 <option value="placebirth">Luogo di Nascita</option>
                                                 <option value="luogo">Luogo</option>
+                                                <option value="contacts">Contatto</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                         <div class="form-row mt-2">
                              <div class="form-group col-12">
-                                    <input class="form-control" type="text" name="criteria" id="textcriteria" placeholder="Inserire criterio da ricercare">
+                                    <input class="form-control" type="text" name="criteria" id="textcriteria" placeholder="Inserire valore da ricercare">
                                     <label for="textcriteria">uguale a :</label>
+                                    <small id="helpId" class="form-text text-muted">(usare % come carattere jolly)</small>
                             </div>
                             </div>
                         <div class="form-row mt-2">
@@ -193,6 +195,7 @@
                                     </div>
                                     <div class="form-group col-4">
                                         <input type="text" name="description" id="description">
+                                        <small id="helpId" class="form-text text-muted">(usare % come carattere jolly)</small>
                                     </div>
                                     <div class="col-4 text-right">
                                         <button type="submit" class="btn btn-outline-primary btn-sm">Cerca</button>
@@ -206,6 +209,7 @@
                     <div class="row mb-5">
                         <div class="col-12 text-right">
                             <a href="{{route('event.index')}}" class="btn btn-sm btn-outline-primary">Vedi Tutti</a>
+                            <a href="{{route('event.create')}}" class="btn btn-sm btn-secondary">Crea Nuovo Evento</a>
                             </div>
                     </div>
 
@@ -245,8 +249,9 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group w-100">
-                                <input type="text" name="criteria" id="criteria" class="form-control" placeholder="(% per carattere jolly)">
+                                <input type="text" name="criteria" id="criteria" class="form-control" placeholder="Inserire valore da ricercare">
                                 <label for="criteria">testo da ricercare</label>
+                                <small id="helpId" class="form-text text-muted">(usare % come carattere jolly)</small>
                             </div>
                         </div>
                         <div class="form-row">

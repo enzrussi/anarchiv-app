@@ -27,7 +27,7 @@
             </div>
             <div class="form-row">
                 <div class=" col-12 form-group">
-                    <input type="text" name="address" id="address" placeholder="Descrizione del Luogo" value="{{$place->address}}">
+                    <input type="text" name="address" id="address" placeholder="indirizzo" value="{{$place->address}}">
                     <label for="address">Indirizzo</label>
                 </div>
             </div>
@@ -43,14 +43,24 @@
             </div>
             <div class="form-row">
                 <div class=" col-12 form-group">
-                    <input type="text" name="relationship" id="relationship"
-                        placeholder="Tipo relazione (residenza,domicilio, ecc..." value="{{$place->relationship}}">
-                    <label for="relationship">Relazione con il luogo</label>
+                    <div class="bootstrap-select-wrapper">
+                        <label>Tipo Relazione</label>
+                        <select class="form-control" name="relationship" id="relationship" title="Scegli un'opzione">
+                            <option value="RESIDENZA" @if($place->relationship == "RESIDENZA") selected @endif >RESIDENZA</option>
+                            <option value="DOMICILIO"  @if($place->relationship == "DOMICILIO") selected @endif >DOMICILIO</option>
+                            <option value="DOMICILIO OCCASIONALE"  @if($place->relationship == "DOMICILIO OCCASIONALE") selected @endif >DOMICILIO OCCASIONALE</option>
+                            <option value="LAVORO"  @if($place->relationship == "LAVORO") selected @endif >LAVORO</option>
+                            <option value="LAVORO OCCASIONALE"  @if($place->relationship == "LAVORO OCCASIONALE") selected @endif >LAVORO OCCASIONALE</option>
+                            <option value="LAVORO STAGIONALE"  @if($place->relationship == "LAVORO STAGIONALE") selected @endif >LAVORO STAGIONALE</option>
+                            <option value="SEDE DITTA" @if($place->relationship == "SEDE DITTA") selected @endif >SEDE DITTA</option>
+                            <option value="ALTRO" @if($place->relationship == "ALTRO") selected @endif >ALTRO</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="form-row">
                 <div class=" col-12 form-group">
-                    <textarea name="note" id="note" cols="30" rows="5" placeholder="Note"></textarea>{{$place->note}}
+                    <textarea name="note" id="note" cols="30" rows="5" placeholder="Note">{{$place->note}}</textarea>
                     <label for="note">Note</label>
                 </div>
             </div>
