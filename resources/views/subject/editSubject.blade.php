@@ -34,8 +34,10 @@
    </div>
     <div class="form-row col-12 mt-5 ">
         <div class="form-group col-4">
+            {{-- <input type="date" class="form-control" name="birthdate" id="birthdate"
+            value="{{date('d/m/Y',strtotime($subject->birthdate))}}" placeholder="inserisci la data in formato gg/mm/aaaa"> --}}
             <input type="date" class="form-control" name="birthdate" id="birthdate"
-            value="{{date('d/m/Y',strtotime($subject->birthdate))}}" placeholder="inserisci la data in formato gg/mm/aaaa">
+            value="{{$subject->birthdate}}" placeholder="inserisci la data in formato gg/mm/aaaa">
             <p style="font-size:small">Data di Nascita</p>
         </div>
         <div class="form-group col-4">
