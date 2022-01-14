@@ -146,7 +146,9 @@ class EventController extends Controller
         $event = Event::find($id);
         $subjects = Subject::all()->sortBy(['surname','name']);
 
-        return view('event.editEventSubject',['event'=>$event, 'subjects'=>$subjects]);
+        // return view('event.editEventSubject',['event'=>$event, 'subjects'=>$subjects]);
+
+        return view('event.ajaxeditEventSubject',['event'=>$event,'subjects'=>$subjects]);
 
     }
 
@@ -154,7 +156,7 @@ class EventController extends Controller
         $event = Event::find($id);
         $event->subjects()->attach($subject_id);
 
-        return redirect()->route('event.show',$event->id);
+        return response()->json($event->subjects);
 
     }
 
@@ -162,8 +164,7 @@ class EventController extends Controller
         $event = Event::find($id);
         $event->subjects()->detach($subject_id);
 
-        return redirect()->route('event.show',$event->id);
-
+        return response()->json($event->subjects);
     }
 
     public function find(Request $request){

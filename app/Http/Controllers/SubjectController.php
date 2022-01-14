@@ -170,6 +170,12 @@ class SubjectController extends Controller
 
     public function indexSubject(Request $request){
 
+        $validate = $request->validate([
+            'criteria'=>'required'
+        ], $messages=[
+            'criteria.required'=>"Inserire un valore nel campo ricerca!",
+        ]);
+
         if($request->field == 'luogo'){
 
             $places = Place::where('city','like',$request->criteria)->get();

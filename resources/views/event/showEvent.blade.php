@@ -168,20 +168,19 @@
 
 
 {{-- partecipanti --}}
-
     <div class="collapse-header text-primary" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
         <button data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
             Partecipanti <span class="badge badge-light">{{$event->subjects->count()}}</span>
         </button>
-        <div class="collapse" id="collapse2" role="tabpanel" aria-labelledby="heading2">
+        <div class="collapse show" id="collapse2" role="tabpanel" aria-labelledby="heading2">
 
             <div class="row mt-3">
                 <div class="col-10 border-bottom border-primary text-success">
                     <h5>Partecipanti</h6>
                 </div>
                 <div class="col-2 border-bottom border-primary text-right">
-                    <a class="btn btn-sm" href="{{route('event.editeventsubject',$event->id)}}">
-                        <svg class="icon"><use xlink:href="{{asset('svg/sprite.svg')}}#it-plus-circle"></use></svg>
+                    <a class="btn btn-sm" href="{{route('event.editeventsubject',$event->id)}}" id="aeditsubject">
+                        <svg class="icon"><use xlink:href="{{asset('svg/sprite.svg')}}#it-pencil"></use></svg>
                     </a>
                 </div>
             </div>
@@ -192,19 +191,27 @@
                         <svg class="icon icon-xs"><use xlink:href="{{asset('photo')}}/{{$s->photo}})}}"></use></svg>
                         <span class="chip-label">
                             <a href="{{route('subject.show',['id'=>$s->id,'tab'=>1])}}">
-                            <span class="text-uppercase">{{$s->surname}}</span><span class="text-capitalize"> {{$s->name}} </span><span> - {{$s->birthdate}}</span>
+                            <span class="text-uppercase">{{$s->surname}}</span>
+                            <span class="text-capitalize"> {{$s->name}} </span>
+                            <span> - {{$s->birthdate}}</span>
                             </a>
                         </span>
                     </div>
                     @endforeach
                 </div>
             </div>
-
-
         </div>
     </div>
-
 </div>
+
+<div class="fixed-top invisible mx-auto display-block"  style="width:100px; top:45%;" id="wr">
+    <div class="d-flex justify-content-center shadow p-3 mb-1 bg-white">
+        <div class="progress-spinner progress-spinner-active text-center">
+            <span class="sr-only">Caricamento...</span>
+        </div>
+    </div>
+</div>
+
 
 
 
@@ -330,4 +337,13 @@
 
 
 
+@endsection
+@section('javascript')
+<script type="text/javascript">
+
+    $("#aeditsubject").click(function(e){
+        $("#wr").removeClass('invisible').addClass('visible');
+    });
+
+</script>
 @endsection

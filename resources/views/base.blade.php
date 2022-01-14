@@ -10,6 +10,16 @@
 </head>
 <body>
 
+    {{-- LOADER --}}
+    <div class="fixed-top visible mx-auto display-block"  style="width:100px; top:45%;" id="wr">
+        <div class="d-flex justify-content-center shadow p-3 mb-1 bg-white">
+            <div class="progress-spinner progress-spinner-active text-center">
+                <span class="sr-only">Caricamento...</span>
+            </div>
+        </div>
+    </div>
+
+
     {{-- HEADER --}}
     <div class="it-header-slim-wrapper">
         <div class="container">
@@ -97,8 +107,7 @@
 
 
 
-
-
+    @yield('javascript')
 
     <script type="text/javascript">
 
@@ -107,9 +116,12 @@
           inputFormat: ["dd/MM/yyyy"],
           outputFormat: 'dd/MM/yyyy',
         });
+        $("#wr").removeClass("visible").addClass("invisible");
         });
 
     </script>
+
+
 
 </body>
 </html>

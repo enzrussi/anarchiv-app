@@ -19,7 +19,10 @@ class VehicleController extends Controller
     {
         //
         $validate=$request->validate([
-            'field'=>'required'
+            'field'=>'required',
+            'criteria' => 'required'
+        ], $messages=[
+            'criteria.required'=>"Valore da ricercare mancante!"
         ]);
 
         $vehicles = Vehicle::where($request->field,'like',$request->criteria)->get();

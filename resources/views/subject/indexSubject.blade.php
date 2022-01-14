@@ -14,9 +14,6 @@
     </div>
 @endif
 
-
-
-
 <div class="col-12 bg-primary text-white mt-3 p-2">
     <h6>Esito Ricerche</h6>
 </div>
@@ -42,6 +39,5 @@
     </table>
 </div>
 
-
-
 @endsection
+
