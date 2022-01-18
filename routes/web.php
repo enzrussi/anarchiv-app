@@ -57,10 +57,15 @@ Route::get('user/resetpassword/{id}',[UserController::class,'resetpassword'])->m
 Route::post('user/updatepassword/{id}',[UserController::class,'updatepassword'])->middleware('auth')->name('user.updatepassword');
 
 //Group managment -----------------------------------------------------------------------------------------------------------------
-Route::resource('group', GroupController::class)->middleware('auth');
-Route::get('listgroup',[GroupController::class,'listGroup'])->name('group.listgroup');
-Route::get('groupsubject',[GroupController::class,'viewSubjectGroup'])->name('group.viewsubject');
+Route::group(['middleware'=>'auth'],function(){
 
+    Route::resource('group', GroupController::class);
+    Route::get('listgroup',[GroupController::class,'listGroup'])->name('group.listgroup');
+    Route::get('groupsubject',[GroupController::class,'viewSubjectGroup'])->name('group.viewsubject');
+    Route::get('group/{id}/attachsubject/{subject_id}',[GroupController::class,'attachSubject'])->name('group.attachsubject');
+    Route::get('group/{id}/detachsubject/{subject_id}',[GroupController::class,'detachSubject'])->name('group.detachsubject');
+
+});
 
 // Subject -----------------------------------------------------------------------------------------------------------------
 Route::group(['middleware'=>'auth'],function () {
@@ -100,6 +105,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('vehicle/{id}/findsubject',[VehicleController::class,'findSubject'])->name('vehicle.findsubject');
     Route::post('vehicle/{id}/attachsubject',[VehicleController::class,'attachSubject'])->name('vehicle.attachsubject');
     Route::post('vehicle/{id}/detachsubject',[VehicleController::class,'detachSubject'])->name('vehicle.detachsubject');
+    Route::post('vehicle/updatephoto/{id}',[VehicleController::class,'updatePhotoVehicle'])->name('vehicle.updatephoto');
 
 
 });

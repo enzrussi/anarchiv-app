@@ -166,7 +166,7 @@
                                                     <p style="font-size:x-small">(cliccare per eliminare)</p>
                                                 </td>
                                                 <td colspan="4">
-                                                    @foreach ($subject->groups as $group)
+                                                    @foreach ($subject->groups->sortBy('groupname') as $group)
                                                         <div class="chip chip-primary chip-lg">
                                                             <a
                                                                 href="{{ route('subject.detachgroup', ['id' => $subject->id, 'group_id' => $group->id]) }}">
@@ -177,22 +177,29 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>
-                                                    <div class="align-middle">
-                                                        <p>Aggiungi gruppo</p>
-                                                        <p style="font-size:x-small">(cliccare per aggiungere)</p>
-                                                    </div>
-                                                </td>
-
-                                                <td colspan="3">
-                                                    @foreach ($groups as $group)
-                                                        @if (null == $subject->groups()->find($group->id))
-                                                            <div class="chip chip-secondary chip-lg">
-                                                                <a href="{{ route('subject.attachgroup', ['id' => $subject->id, 'group_id' => $group->id]) }}">
-                                                                    <span class="chip-label">{{ $group->groupname }}</span></a>
+                                                <td colspan="4">
+                                                    <div id="collapseDiv1" class="collapse-div" role="tablist">
+                                                        <div class="collapse-header" id="heading1">
+                                                            <button data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                                                                <div class="align-middle">
+                                                                    <span>Aggiungi gruppo</span> <span style="font-size:x-small">(cliccare per aggiungere)</span>
+                                                                </div>
+                                                            </button>
+                                                        </div>
+                                                        <div id="collapse1" class="collapse" role="tabpanel" aria-labelledby="heading1">
+                                                            <div class="collapse-body">
+                                                                @foreach ($groups->sortBy('groupname') as $group)
+                                                                @if (null == $subject->groups()->find($group->id))
+                                                                    <div class="chip chip-secondary chip-lg w-100">
+                                                                        <a href="{{ route('subject.attachgroup', ['id' => $subject->id, 'group_id' => $group->id]) }}">
+                                                                            <span class="chip-label">{{ $group->groupname }}</span></a>
+                                                                    </div>
+                                                                @endif
+                                                                @endforeach
                                                             </div>
-                                                        @endif
-                                                    @endforeach
+                                                        </div>
+                                                    </div>
+
                                                 </td>
                                             </tr>
                                         </tbody>

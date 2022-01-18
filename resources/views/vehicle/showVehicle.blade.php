@@ -21,37 +21,51 @@
         </a>
     </div>
 </div>
-<div class="row mt-3">
+
+<div class="row mt-5">
     <div class="col-4">
-        <span>Targa: </span><span>{{$vehicle->plate}}</span>
+        @if($vehicle->photovehicle == Null)
+        <img src="{{asset('svg/CAR.svg')}}" style="width:300px">
+        @else
+        <img src="{{asset('photovehicle')}}/{{$vehicle->photovehicle}}" style="width:300px">
+        @endif
     </div>
-    <div class="col-4">
-        <span>Modello: </span><span>{{$vehicle->model}}</span>
-    </div>
-    <div class="col-4">
-        <span>Colore: </span><span>{{$vehicle->color}}</span>
+    <div class="col-8">
+        {{-- ---------------------------------------- Vehicle Data ------------------------------------------- --}}
+        <div class="row mt-3">
+            <div class="col-4">
+                <span>Targa: </span><span>{{$vehicle->plate}}</span>
+            </div>
+            <div class="col-4">
+                <span>Modello: </span><span>{{$vehicle->model}}</span>
+            </div>
+            <div class="col-4">
+                <span>Colore: </span><span>{{$vehicle->color}}</span>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12" style="font-size:small">
+                <span>Dato aggiornato il {{$vehicle->updated_at}} da {{$vehicle->updatedfrom}}</span>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12">
+                <span>Note: </span><span>{{$vehicle->note}}</span>
+            </div>
+        </div>
     </div>
 </div>
+
+{{-- ----------------------------------------- Subject title -------------------------------- --}}
 <div class="row mt-3">
-    <div class="col-12" style="font-size:small">
-        <span>Dato aggiornato il {{$vehicle->updated_at}} da {{$vehicle->updatedfrom}}</span>
-    </div>
-</div>
-<div class="row mt-3">
-    <div class="col-12">
-        <span>Note: </span><span>{{$vehicle->note}}</span>
-    </div>
-</div>
-<div class="row mt-3">
-    <div class="col-9">
-        Soggetti Collegati:
-    </div>
+    <div class="col-9">Soggetti Collegati:</div>
     <div class="col-3 text-right">
         <button title="Aggiungi Soggetto" class="btn" data-toggle="modal" data-target="#attachSubjectModal">
             <svg class="icon"><use xlink:href="{{asset('svg/sprite.svg')}}#it-plus-circle"></use></svg>
         </Button>
+    </div>
 </div>
-</div>
+{{-- -------------------------- Subject list --------------------------------------- --}}
 <div class="row">
     @foreach ($vehicle->subjects as $s )
         <div class="col-12 col-lg-4">
@@ -59,7 +73,6 @@
                 <div class="card card-bg border-bottom-card">
                 <div class="flag-icon"></div>
                 <div class="etichetta">
-
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">
@@ -127,7 +140,6 @@
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-12">
-                      {{-- <label for="surname">Cognome:</label> --}}
                       <input type="text" class="form-control" name="surname" id="surname" aria-describedby="helpId">
                       <small id="helpId" class="form-text text-muted">Cognome(usare % come carattere jolly)</small>
                     </div>

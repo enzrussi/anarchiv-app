@@ -23,18 +23,26 @@
       </div>
       <div id="collapse{{$group->id}}" class="collapse" role="tabpane{{$group->id}}" aria-labelledby="heading{{$group->id}}">
         <div class="collapse-body">
-                @foreach ($group->subjects->sortBy('surname')->sortBy('name') as $subject )
-                <div class="chip chip-lg">
-                    <div class="avatar size-lg">
-                      <img src="{{asset('photo')}}/{{$subject->photo}}" alt="{{$subject->surname}} {{$subject->name}}">
-                    </div>
-                    <label class="chip-label text-uppercase" for="chip-03">
-                        <a href="{{route('subject.show',['id'=>$subject->id,'tab'=>1])}}">
-                            {{$subject->surname}} {{$subject->name}} {{date('d-m-Y',strtotime($subject->birthdate))}}</a>
-                    </label>
-                  </div>
-                @endforeach
-
+            <div class="row">
+                <div class="col-12 border-bottom text-right pb-1">
+                    <a class="btn btn-sm btn-primary" href="{{route('group.show',$group)}}">Gestione Partecipanti</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    @foreach ($group->subjects->sortBy('surname')->sortBy('name') as $subject )
+                    <div class="chip chip-lg">
+                        <div class="avatar size-lg">
+                            <img src="{{asset('photo')}}/{{$subject->photo}}" alt="{{$subject->surname}} {{$subject->name}}">
+                        </div>
+                        <label class="chip-label text-uppercase" for="chip-03">
+                            <a href="{{route('subject.show',['id'=>$subject->id,'tab'=>1])}}">
+                                {{$subject->surname}} {{$subject->name}} {{date('d-m-Y',strtotime($subject->birthdate))}}</a>
+                        </label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
       </div>
     @endforeach

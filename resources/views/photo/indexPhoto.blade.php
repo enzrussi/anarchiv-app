@@ -42,12 +42,9 @@
                       </div>
                     </div>
                     <span class="it-griditem-text-wrapper ">
-
                         <span class="it-griditem-text">
                             <p>{{$photo->description}} - {{$photo->url}}</p>
-
                         </span>
-
                     </span>
                 </a>
                 </div>

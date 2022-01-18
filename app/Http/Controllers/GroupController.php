@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Group;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
+use App\Models\Subject;
 use Nette\Utils\Random;
 use Illuminate\Support\Facades\DB;
 
@@ -18,7 +19,7 @@ class GroupController extends Controller
     public function index()
     {
         //
-        $groups = Group::all();
+        $groups = Group::all()->sortBy('groupname');
         return view('group.indexGroup',['groups' => $groups]);
     }
 
@@ -55,7 +56,6 @@ class GroupController extends Controller
 
         return redirect()->route('group.index')->with('alerttype','success')->with('alertmessage','Gruppo creato con successo');
 
-        dd($request);
     }
 
     /**
@@ -67,6 +67,9 @@ class GroupController extends Controller
     public function show(Group $group)
     {
         //
+        $subjects = Subject::all();
+
+        return view('group.updateGroupSubject',['group'=>$group,'subjects'=>$subjects]);
     }
 
     /**
@@ -131,11 +134,23 @@ class GroupController extends Controller
 
     }
 
-    public function viewSubjectGroup($id){
+    public function attachSubject($id,$subject_id){
 
+        $group = Group::find($id);
+        $group->subjects()->attach($subject_id);
 
+        return response()->json($group->subjects());
+    }
 
+    public function detachSubject($id,$subject_id){
+
+        $group = Group::find($id);
+        $group->subjects()->detach($subject_id);
+
+        return response()->json($group->subjects());
 
     }
+
+
 
 }

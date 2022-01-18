@@ -7,6 +7,8 @@ use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use DateTime;
+use Exception;
 
 class VehicleController extends Controller
 {
@@ -15,6 +17,8 @@ class VehicleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index(Request $request)
     {
         //
@@ -170,6 +174,14 @@ class VehicleController extends Controller
         $vehicle->delete();
         // cancello la relazione con il soggetto
         DB::table('subject_vehicle')->where('vehicle_id',$id)->delete();
+        //cancello la sua foto
+        try{
+            if($vehicle->photovehicle!=""){
+                unlink("./photovehicle/".$vehicle->photovehicle);
+            }
+        }catch (Exception $e){
+
+        }
 
         return redirect()->route('dashboard')->with('alerttype','success')->with('alertmessage','Veicolo eliminato con successo');
 
@@ -206,8 +218,42 @@ class VehicleController extends Controller
         $vehicle = Vehicle::find($id);
         DB::table('subject_vehicle')->where([['subject_id',$request->subject_id],['relationship',$request->relationship]])->delete();
 
-
         return redirect()->back();
+
+    }
+
+    public function updatePhotoVehicle(Request $request, $id){
+
+        $validate= $request->validate([
+            'url'=>'required|file|mimes:jpg'
+        ], $messages = [
+            'url.required' => 'E\' richiesto almeno un file',
+            'mimes' => 'Il file immagine deve essere .jpg'
+        ]);
+
+
+        $vehicle = Vehicle::find($id);
+
+        try{
+            if($vehicle->photovehicle!=""){
+                unlink("./photovehicle/".$vehicle->photovehicle);
+            }
+        }catch (Exception $e){
+
+        }
+
+
+        $date = new DateTime();
+
+        $photofilename = $id.'v'.strval($date->getTimestamp()).".jpg";
+
+        move_uploaded_file($_FILES['url']['tmp_name'],"./photovehicle/".$photofilename);
+
+        $vehicle->photovehicle = $photofilename;
+        $vehicle->save();
+
+        return redirect()->route('vehicle.show',$vehicle->id);
+
 
 
 

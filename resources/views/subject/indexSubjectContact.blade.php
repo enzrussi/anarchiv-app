@@ -28,10 +28,10 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($contacts as $c )
+                @foreach ($contacts as $c)
                 <tr>
                     <td>{{$c->contact}}</td>
-                    <td class="text-uppercase">{{$c->contacttype}}</td>c
+                    <td class="text-uppercase">{{$c->contacttype}}</td>
                     <td class="text-uppercase">{{$c->relationship}}</td>
                     <td>
                         <a href="{{route('subject.show',['id'=>$c->subject_id,'tab'=>4])}}">
