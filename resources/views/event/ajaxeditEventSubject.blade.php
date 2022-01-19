@@ -104,7 +104,7 @@ $('div .chipright').click(function(e){
         dataType:'json',
         success:function(result){
 
-            },
+        },
     });
     $(this).toggle();
     $("#leftdiv").children("#"+id).show();
