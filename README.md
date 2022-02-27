@@ -17,11 +17,12 @@ Il Database di appoggio è Sqlite3.
 
 
 ### installazione
-'''
+```
+
 git clone https://github.com/enzrussi/anarchiv-app.git
 
 
-'''
+```
 
 
 
