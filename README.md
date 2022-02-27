@@ -16,13 +16,21 @@ Utilizzando XAMPP si può utilizzare su qualsiasi PC
 Il Database di appoggio è Sqlite3.
 
 
-### installazione
+### Installazione
+
+Sacricare decomprimere il repository in formato .zip in una cartella dei siti web.
+
+Poi lanciare i seguenti comandi per inizializzare il Database e creare l'utente **Admin** con passaword iniziale **password**.
+
+
+```
+php artisan migrate:fresh
+
+php artisan db:seed --class:DatabaseSeeder.php
+
 ```
 
-git clone https://github.com/enzrussi/anarchiv-app.git
-
-
-```
+***
 
 
 
