@@ -26,7 +26,7 @@ Poi lanciare i seguenti comandi per inizializzare il Database e creare l'utente 
 ```
 php artisan migrate:fresh
 
-php artisan db:seed --class:DatabaseSeeder.php
+php artisan db:seed --class:DatabaseSeeder
 
 ```
 
