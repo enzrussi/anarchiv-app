@@ -1,3 +1,32 @@
+# ANARCHIV_APP
+***
+
+Software di gestione di un Database di soggetti con fotografie e collegamento a luoghi,veicoli, gruppi appartenenza e eventi.
+Utilizza il Framework Laravel
+
+
+### Requisiti installazione
+
+- Server Web (IIS, APACHI)
+- Php
+- Sqlite3
+
+Utilizzando XAMPP si può utilizzare su qualsiasi PC
+
+Il Database di appoggio è Sqlite3.
+
+
+### installazione
+'''
+git clone https://github.com/enzrussi/anarchiv-app.git
+
+
+'''
+
+
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
