@@ -26,7 +26,7 @@ Il Database di appoggio è Sqlite3.
 
 Scaricare decomprimere il repository in formato .zip in una cartella dei siti web.
 
-Nel file .env aggiornare il percorso del database (C:/xampp/htdocs/anarchi-app/database)
+Nel file .env aggiornare il percorso del database (C:/xampp/htdocs/anarchiv-app/database)
 
 Poi lanciare i seguenti comandi per inizializzare il Database e creare l'utente **Admin** con passaword iniziale **password**.
 
