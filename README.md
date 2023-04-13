@@ -24,7 +24,9 @@ Il Database di appoggio è Sqlite3.
 ### Installazione
 
 
-Scaricare decomprimere il repository in formato .zip in una cartella dei siti web.
+Scaricare decomprimere il repository in formato .zip in una cartella dei siti we rinominandola anarchiv-app
+
+Creare una copia del file .env.example.com nominandola semplicemente .env
 
 Nel file .env aggiornare il percorso del database (C:/xampp/htdocs/anarchiv-app/database)
 
