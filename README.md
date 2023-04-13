@@ -7,23 +7,33 @@ Utilizza il Framework Laravel
 
 ### Requisiti installazione
 
-- Server Web (IIS, APACHI)
+- Server Web (IIS, APACHE)
 - Php
 - Sqlite3
 
 Utilizzando XAMPP si può utilizzare su qualsiasi PC
+
+Installare composer
+
+```
+```
 
 Il Database di appoggio è Sqlite3.
 
 
 ### Installazione
 
-Sacricare decomprimere il repository in formato .zip in una cartella dei siti web.
+
+Scaricare decomprimere il repository in formato .zip in una cartella dei siti web.
+
+
 
 Poi lanciare i seguenti comandi per inizializzare il Database e creare l'utente **Admin** con passaword iniziale **password**.
 
 
 ```
+composer update
+
 php artisan migrate:fresh
 
 php artisan db:seed --class:DatabaseSeeder
