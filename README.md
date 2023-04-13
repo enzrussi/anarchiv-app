@@ -1,4 +1,4 @@
-# ANARCHIV_APP
+# ANARCHIV_APP By Russi Enzo
 ***
 
 Software di gestione di un Database di soggetti con fotografie e collegamento a luoghi,veicoli, gruppi appartenenza e eventi.
@@ -27,8 +27,14 @@ Scaricare decomprimere il repository in formato .zip in una cartella dei siti we
 Nel file .env aggiornare il percorso del database 
 
 ```
+# se usate xampp
 DB_CONNECTION=sqlite
 DB_DATABASE=C:\xampp\htdocs\anarchiv-app\database\anarchivdb.db
+
+# usate IIS
+DB_CONNECTION=sqlite
+DB_DATABASE=C:\inetpub\wwwroot\anarchiv-app\database\anarchivdb.db
+
 
 ```
 
@@ -46,7 +52,7 @@ php artisan key:generate
 
 ```
 
-se tutto è andato a buon fine lìapplicazione sarà reperibile al link **http://<<ip del pc>>/anarchiv-app/public**
+se tutto è andato a buon fine l'applicazione sarà reperibile al link ***http://[ip del pc]/anarchiv-app/public***
 
 ***
 
