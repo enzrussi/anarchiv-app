@@ -13,8 +13,7 @@ Utilizza il Framework Laravel
 
 Utilizzando XAMPP si può utilizzare su qualsiasi PC
 
-Installare composer
-
+- Installare composer
 
 Il Database di appoggio è Sqlite3.
 
@@ -22,7 +21,7 @@ Il Database di appoggio è Sqlite3.
 ### Installazione
 
 
-Scaricare decomprimere il repository in formato .zip in una cartella dei siti we rinominandola anarchiv-app
+Scaricare decomprimere il repository in formato .zip in una cartella dei siti web rinominandola anarchiv-app
 
 Nel file .env aggiornare il percorso del database 
 
